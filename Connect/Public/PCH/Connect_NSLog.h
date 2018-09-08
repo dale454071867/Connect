@@ -1,0 +1,19 @@
+////  Connect_NSLog.h
+//  Connect
+//
+//  Created by Dwang on 2018/9/2.
+//	QQ群:	577506623
+//	GitHub:	https://github.com/CoderDwang
+//  Copyright © 2018年 CoderDwang. All rights reserved.
+//
+
+#ifndef Connect_NSLog_h
+#define Connect_NSLog_h
+
+#ifdef DEBUG
+#define NSLog( s, ... ) NSLog( @"\n[所在方法:%s]\n[所在行数:%d]\n[打印内容:%@]", __func__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
+#else
+#define NSLog(...)
+#endif
+
+#endif /* Connect_NSLog_h */
