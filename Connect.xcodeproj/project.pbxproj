@@ -13,6 +13,12 @@
 		925423162139154700F25530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 925423152139154700F25530 /* AppDelegate.m */; };
 		9254231E2139154900F25530 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9254231D2139154900F25530 /* Assets.xcassets */; };
 		925423242139154900F25530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 925423232139154900F25530 /* main.m */; };
+		92D423E22146874A00C9F915 /* CNCQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423E12146874A00C9F915 /* CNCQueryViewController.m */; };
+		92D423E62146891C00C9F915 /* CNCQueryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423E52146891C00C9F915 /* CNCQueryView.m */; };
+		92D423EC2146896500C9F915 /* CNCCreateAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423EB2146896500C9F915 /* CNCCreateAccountView.m */; };
+		92D423EF214689A000C9F915 /* CNCAccountManagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423EE214689A000C9F915 /* CNCAccountManagerView.m */; };
+		92D423F2214689BD00C9F915 /* CNCSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423F1214689BD00C9F915 /* CNCSettingView.m */; };
+		92D423F621468A4800C9F915 /* CNCQueryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423F521468A4800C9F915 /* CNCQueryCell.m */; };
 		92E3116E213F79D70095F1CC /* CNCCreateAccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E3116D213F79D70095F1CC /* CNCCreateAccountModel.m */; };
 		92E31171213F7B580095F1CC /* CNCCreateAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E31170213F7B580095F1CC /* CNCCreateAccountCell.m */; };
 		92FE16EA213BAF5C00FB238A /* AppDelegate+CNCExtenison.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FE16E9213BAF5C00FB238A /* AppDelegate+CNCExtenison.m */; };
@@ -28,7 +34,6 @@
 		92FE1716213BBD5500FB238A /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FE1714213BBD5500FB238A /* NSArray+Log.m */; };
 		92FE171A213BD54300FB238A /* CNCTabBarViewController+CNCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FE1719213BD54300FB238A /* CNCTabBarViewController+CNCExtension.m */; };
 		92FE171F213BD73400FB238A /* CNCSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FE171E213BD73400FB238A /* CNCSettingViewController.m */; };
-		92FE172B213BD9A800FB238A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 92FE172D213BD9A800FB238A /* Localizable.strings */; };
 		92FE1730213BDAA300FB238A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92FE172F213BDAA300FB238A /* Launch Screen.storyboard */; };
 		92FE1734213BDD4700FB238A /* CNCSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FE1733213BDD4700FB238A /* CNCSettingModel.m */; };
 		92FE1738213BE0F200FB238A /* QMUITableViewCell+CNCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FE1737213BE0F200FB238A /* QMUITableViewCell+CNCExtension.m */; };
@@ -52,12 +57,25 @@
 		92266DC22143710500314435 /* QMUIAlertController+CNCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "QMUIAlertController+CNCExtension.m"; sourceTree = "<group>"; };
 		92266DC52143774C00314435 /* NSDate+CNCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+CNCExtension.h"; sourceTree = "<group>"; };
 		92266DC62143774C00314435 /* NSDate+CNCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CNCExtension.m"; sourceTree = "<group>"; };
+		92266E572143B07D00314435 /* Connect_Font.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Connect_Font.h; sourceTree = "<group>"; };
 		925423112139154700F25530 /* Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		925423142139154700F25530 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		925423152139154700F25530 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9254231D2139154900F25530 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		925423222139154900F25530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		925423232139154900F25530 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		92D423E02146874A00C9F915 /* CNCQueryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCQueryViewController.h; sourceTree = "<group>"; };
+		92D423E12146874A00C9F915 /* CNCQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCQueryViewController.m; sourceTree = "<group>"; };
+		92D423E42146891C00C9F915 /* CNCQueryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCQueryView.h; sourceTree = "<group>"; };
+		92D423E52146891C00C9F915 /* CNCQueryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCQueryView.m; sourceTree = "<group>"; };
+		92D423EA2146896500C9F915 /* CNCCreateAccountView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCCreateAccountView.h; sourceTree = "<group>"; };
+		92D423EB2146896500C9F915 /* CNCCreateAccountView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCCreateAccountView.m; sourceTree = "<group>"; };
+		92D423ED214689A000C9F915 /* CNCAccountManagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCAccountManagerView.h; sourceTree = "<group>"; };
+		92D423EE214689A000C9F915 /* CNCAccountManagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCAccountManagerView.m; sourceTree = "<group>"; };
+		92D423F0214689BD00C9F915 /* CNCSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCSettingView.h; sourceTree = "<group>"; };
+		92D423F1214689BD00C9F915 /* CNCSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCSettingView.m; sourceTree = "<group>"; };
+		92D423F421468A4800C9F915 /* CNCQueryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCQueryCell.h; sourceTree = "<group>"; };
+		92D423F521468A4800C9F915 /* CNCQueryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCQueryCell.m; sourceTree = "<group>"; };
 		92E3116C213F79D70095F1CC /* CNCCreateAccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCCreateAccountModel.h; sourceTree = "<group>"; };
 		92E3116D213F79D70095F1CC /* CNCCreateAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCCreateAccountModel.m; sourceTree = "<group>"; };
 		92E3116F213F7B580095F1CC /* CNCCreateAccountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCCreateAccountCell.h; sourceTree = "<group>"; };
@@ -91,8 +109,6 @@
 		92FE1719213BD54300FB238A /* CNCTabBarViewController+CNCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CNCTabBarViewController+CNCExtension.m"; sourceTree = "<group>"; };
 		92FE171D213BD73400FB238A /* CNCSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCSettingViewController.h; sourceTree = "<group>"; };
 		92FE171E213BD73400FB238A /* CNCSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCSettingViewController.m; sourceTree = "<group>"; };
-		92FE172C213BD9A800FB238A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		92FE172E213BD9B200FB238A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		92FE172F213BDAA300FB238A /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		92FE1732213BDD4700FB238A /* CNCSettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCSettingModel.h; sourceTree = "<group>"; };
 		92FE1733213BDD4700FB238A /* CNCSettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCSettingModel.m; sourceTree = "<group>"; };
@@ -194,10 +210,68 @@
 			path = Connect;
 			sourceTree = "<group>";
 		};
+		92D423DC2146868300C9F915 /* SettingModul */ = {
+			isa = PBXGroup;
+			children = (
+				92FE175B213D48CF00FB238A /* CreateAccount */,
+				92FE1752213D0FE900FB238A /* IgnoreApps */,
+				92FE1743213CC7E200FB238A /* AccountManager */,
+				92FE1720213BD73900FB238A /* Setting */,
+			);
+			path = SettingModul;
+			sourceTree = "<group>";
+		};
+		92D423DD214686FF00C9F915 /* QueryModul */ = {
+			isa = PBXGroup;
+			children = (
+				92D423DE2146871E00C9F915 /* Query */,
+			);
+			path = QueryModul;
+			sourceTree = "<group>";
+		};
+		92D423DE2146871E00C9F915 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				92D423E32146890800C9F915 /* View */,
+				92D423DF2146873200C9F915 /* Controller */,
+			);
+			path = Query;
+			sourceTree = "<group>";
+		};
+		92D423DF2146873200C9F915 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				92D423E02146874A00C9F915 /* CNCQueryViewController.h */,
+				92D423E12146874A00C9F915 /* CNCQueryViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		92D423E32146890800C9F915 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92D423F321468A2F00C9F915 /* Cell */,
+				92D423E42146891C00C9F915 /* CNCQueryView.h */,
+				92D423E52146891C00C9F915 /* CNCQueryView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92D423F321468A2F00C9F915 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92D423F421468A4800C9F915 /* CNCQueryCell.h */,
+				92D423F521468A4800C9F915 /* CNCQueryCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		92E31166213F73520095F1CC /* View */ = {
 			isa = PBXGroup;
 			children = (
 				92E3116A213F79BD0095F1CC /* Cell */,
+				92D423EA2146896500C9F915 /* CNCCreateAccountView.h */,
+				92D423EB2146896500C9F915 /* CNCCreateAccountView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -250,6 +324,7 @@
 				92FE1712213BBD1D00FB238A /* Connect_NSLog.h */,
 				92FE1742213BFD2700FB238A /* Connect_UserDefaults.h */,
 				92FE1751213CE94A00FB238A /* Connect_SQL.h */,
+				92266E572143B07D00314435 /* Connect_Font.h */,
 			);
 			path = PCH;
 			sourceTree = "<group>";
@@ -402,10 +477,8 @@
 		92FE171B213BD71300FB238A /* Function */ = {
 			isa = PBXGroup;
 			children = (
-				92FE175B213D48CF00FB238A /* CreateAccount */,
-				92FE1752213D0FE900FB238A /* IgnoreApps */,
-				92FE1743213CC7E200FB238A /* AccountManager */,
-				92FE1720213BD73900FB238A /* Setting */,
+				92D423DD214686FF00C9F915 /* QueryModul */,
+				92D423DC2146868300C9F915 /* SettingModul */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -432,7 +505,6 @@
 		92FE1721213BD8BA00FB238A /* Language */ = {
 			isa = PBXGroup;
 			children = (
-				92FE172D213BD9A800FB238A /* Localizable.strings */,
 			);
 			path = Language;
 			sourceTree = "<group>";
@@ -460,6 +532,8 @@
 			children = (
 				92FE173E213BF89000FB238A /* Header */,
 				92FE173A213BE20600FB238A /* Cell */,
+				92D423F0214689BD00C9F915 /* CNCSettingView.h */,
+				92D423F1214689BD00C9F915 /* CNCSettingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -505,6 +579,8 @@
 			isa = PBXGroup;
 			children = (
 				92266DBC2143632500314435 /* Cell */,
+				92D423ED214689A000C9F915 /* CNCAccountManagerView.h */,
+				92D423EE214689A000C9F915 /* CNCAccountManagerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -635,7 +711,6 @@
 			files = (
 				92FE1730213BDAA300FB238A /* Launch Screen.storyboard in Resources */,
 				9254231E2139154900F25530 /* Assets.xcassets in Resources */,
-				92FE172B213BD9A800FB238A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,13 +765,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				92FE1756213D102C00FB238A /* CNCIgnoreAppsViewController.m in Sources */,
+				92D423EC2146896500C9F915 /* CNCCreateAccountView.m in Sources */,
 				92FE174C213CE33400FB238A /* CNCAccountModel.m in Sources */,
 				92E31171213F7B580095F1CC /* CNCCreateAccountCell.m in Sources */,
+				92D423E62146891C00C9F915 /* CNCQueryView.m in Sources */,
 				92FE16F0213BB04800FB238A /* CNCViewController.m in Sources */,
+				92D423EF214689A000C9F915 /* CNCAccountManagerView.m in Sources */,
 				92FE171F213BD73400FB238A /* CNCSettingViewController.m in Sources */,
 				92FE16F4213BB07600FB238A /* CNCNavigationController.m in Sources */,
 				92FE175F213D48E900FB238A /* CNCCreateAccountViewController.m in Sources */,
+				92D423F2214689BD00C9F915 /* CNCSettingView.m in Sources */,
 				92FE173D213BE22600FB238A /* CNCSettingCell.m in Sources */,
+				92D423E22146874A00C9F915 /* CNCQueryViewController.m in Sources */,
 				92FE1741213BF8D200FB238A /* CNCSettingHeaderView.m in Sources */,
 				92FE1747213CC80000FB238A /* CNCAccountManagerViewController.m in Sources */,
 				92FE1750213CE60C00FB238A /* CNCSQLManager.m in Sources */,
@@ -714,6 +794,7 @@
 				92266DC72143774C00314435 /* NSDate+CNCExtension.m in Sources */,
 				92FE16EA213BAF5C00FB238A /* AppDelegate+CNCExtenison.m in Sources */,
 				92FE16FC213BB0C400FB238A /* CNCActivityViewController.m in Sources */,
+				92D423F621468A4800C9F915 /* CNCQueryCell.m in Sources */,
 				92FE1711213BBB7B00FB238A /* UITableView+CNCExtension.m in Sources */,
 				92FE1705213BB65D00FB238A /* QMUIConfigurationTemplate.m in Sources */,
 				92FE1734213BDD4700FB238A /* CNCSettingModel.m in Sources */,
@@ -722,18 +803,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		92FE172D213BD9A800FB238A /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				92FE172C213BD9A800FB238A /* zh-Hans */,
-				92FE172E213BD9B200FB238A /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		925423252139154900F25530 /* Debug */ = {

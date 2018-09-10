@@ -15,7 +15,7 @@
 
 - (void)cnc_addChildViewController:(CNCViewController *)viewController tabBarImageName:(NSString *)imgName title:(NSString *)title {
     viewController.tabBarItem.image = UIImageMake(imgName);
-    viewController.title = NSLocalizedString(title, nil);
+    viewController.title = title;
     [self addChildViewController:[[CNCNavigationController alloc] initWithRootViewController:viewController]];
 }
 

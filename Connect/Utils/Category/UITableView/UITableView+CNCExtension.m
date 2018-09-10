@@ -70,7 +70,7 @@
     }
     
     UIImage *img = nil;
-    NSString *msg = NSLocalizedString(@"noData", nil);
+    NSString *msg = @"暂无数据";
     UIColor *msgColor = [UIColor lightGrayColor];
     UIFont *msgFont = [UIFont systemFontOfSize:17];
     if ([self.delegate respondsToSelector:@selector(cnc_noDataViewImage)]) {

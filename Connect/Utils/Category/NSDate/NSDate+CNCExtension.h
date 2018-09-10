@@ -11,7 +11,7 @@
 
 @interface NSDate (CNCExtension)
 
-/** 获取当前时间, 格式为:(yyyy-MM-dd hh:mm:ss) */
-+ (NSString *)cnc_currentTime;
+/** 获取当前时间, 格式为:(MM-dd) */
++ (NSString *)cnc_currentDate;
 
 @end

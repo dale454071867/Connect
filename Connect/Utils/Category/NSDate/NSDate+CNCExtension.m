@@ -11,10 +11,10 @@
 
 @implementation NSDate (CNCExtension)
 
-+ (NSString *)cnc_currentTime {
++ (NSString *)cnc_currentDate {
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [formatter setDateFormat:@"MM-dd"];
     return [formatter stringFromDate:date];
 }
 
