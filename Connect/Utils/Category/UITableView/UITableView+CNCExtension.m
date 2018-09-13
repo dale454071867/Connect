@@ -37,7 +37,7 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        ExchangeImplementationsInTwoClasses(self, @selector(reloadData), self, @selector(cnc_reloadData));
+        ExchangeImplementations([self class], @selector(reloadData), @selector(cnc_reloadData));
     });
 }
 

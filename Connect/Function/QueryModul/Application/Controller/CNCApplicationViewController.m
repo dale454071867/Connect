@@ -27,7 +27,6 @@ static NSString *const kIdentifier = @"cell";
     self.title = @"应用列表";
     self.titleView.subtitle = self.accountModel.email;
     self.titleView.style = QMUINavigationTitleViewStyleSubTitleVertical;
-    
 }
 
 - (void)setUI {

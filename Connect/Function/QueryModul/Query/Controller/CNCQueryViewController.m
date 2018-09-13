@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [CNCNotification cnc_addObserver:self selector:@selector(cnc_reloadData) name:kRELOADDATA];
+    [CNCNotification cnc_addObserver:self selector:@selector(cnc_reloadData) name:kQUERYRELOADDATA];
 }
 
 - (void)setUI {
@@ -76,7 +76,7 @@
 }
 
 - (void)dealloc {
-    [CNCNotification cnc_removeObserver:self name:kRELOADDATA];
+    [CNCNotification cnc_removeObserver:self name:kQUERYRELOADDATA];
 }
 
 @end

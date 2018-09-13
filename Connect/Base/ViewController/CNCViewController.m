@@ -22,6 +22,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"");
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];

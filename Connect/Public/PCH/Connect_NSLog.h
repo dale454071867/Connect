@@ -11,7 +11,7 @@
 #define Connect_NSLog_h
 
 #ifdef DEBUG
-#define NSLog( s, ... ) NSLog( @"\n[所在方法:%s]\n[所在行数:%d]\n[打印内容:%@]", __func__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
+#define NSLog( s, ... ) NSLog( @"\n{\n所在方法:%s\n所在行数:%d\n打印内容:%@\n}", __func__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
 #else
 #define NSLog(...)
 #endif

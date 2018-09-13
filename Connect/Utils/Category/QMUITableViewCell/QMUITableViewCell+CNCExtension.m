@@ -14,7 +14,7 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        ExchangeImplementationsInTwoClasses(self, @selector(initWithStyle:reuseIdentifier:), self, @selector(cnc_initWithStyle:reuseIdentifier:));
+        ExchangeImplementations([self class], @selector(initWithStyle:reuseIdentifier:), @selector(cnc_initWithStyle:reuseIdentifier:));
     });
 }
 

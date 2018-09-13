@@ -11,7 +11,7 @@
 #define Connect_NotificationName_h
 
 /** 查询界面刷新通知 */
-static NSString * const kRELOADDATA = @"cnc_reloadData";
+static NSString * const kQUERYRELOADDATA = @"cnc_reloadData";
 
 
 #endif /* Connect_NotificationName_h */

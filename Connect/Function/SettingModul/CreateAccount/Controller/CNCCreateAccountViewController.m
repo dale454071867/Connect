@@ -12,6 +12,7 @@
 #import "CNCCreateAccountView.h"
 #import "CNCCreateAccountCell.h"
 #import "NSDate+CNCExtension.h"
+#import "CNCNotification.h"
 #import "CNCSQLManager.h"
 
 @interface CNCCreateAccountViewController ()<QMUITableViewDelegate, QMUITableViewDataSource>
@@ -43,7 +44,22 @@
         NSString *value = cell.content.text.qmui_trimAllWhiteSpace;
         result = value.length;
         if (result) {
-            [model setValue:value forKey:obj.key];
+            BOOL *b = stop;
+            if (idx == 0) {
+                [CNCSQL.accountModels enumerateObjectsUsingBlock:^(CNCAccountModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([value isEqualToString:obj.email]) {
+                        *b = YES;
+                        *stop = YES;
+                        result = NO;
+                        QMUIAlertController *alert = [[QMUIAlertController alloc] initWithTitle:nil message:@"当前账号已存在" preferredStyle:QMUIAlertControllerStyleAlert];
+                        [alert addCancelAction];
+                        [alert showWithAnimated:YES];
+                    }
+                }];
+            }
+            if (!*b) {
+                [model setValue:value forKey:obj.key];
+            }
         }else {
             *stop = YES;
             QMUIAlertController *alert = [[QMUIAlertController alloc] initWithTitle:nil message:@"请输入对应的内容" preferredStyle:QMUIAlertControllerStyleAlert];
@@ -54,6 +70,7 @@
     if (result) {
         [model setValue:[NSDate cnc_currentDate] forKey:@"lastTime"];
         [CNCSQL cnc_putToAccountSQLTableWithModel:model];
+        [CNCNotification cnc_postNotificationName:kQUERYRELOADDATA];
         if (self.cnc_updateAccountTableView) {
             self.cnc_updateAccountTableView();
             [self.navigationController popViewControllerAnimated:YES];

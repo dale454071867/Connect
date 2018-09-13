@@ -14,7 +14,7 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        ExchangeImplementationsInTwoClasses(self, @selector(viewDidLoad), self, @selector(cnc_viewDidLoad));
+        ExchangeImplementations([self class], @selector(viewDidLoad), @selector(cnc_viewDidLoad));
     });
 }
 

@@ -14,7 +14,7 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        ExchangeImplementationsInTwoClasses(self, @selector(initWithFrame:), self, @selector(cnc_cell_initWithFrame:));
+        ExchangeImplementations([self class], @selector(initWithFrame:), @selector(cnc_cell_initWithFrame:));
     });
 }
 
