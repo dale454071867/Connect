@@ -7,11 +7,12 @@
 //  Copyright © 2018年 CoderDwang. All rights reserved.
 //
 
+#import "CNCApplicationViewController.h"
 #import "CNCQueryViewController.h"
+#import "CNCNotification.h"
 #import "CNCSQLManager.h"
 #import "CNCQueryView.h"
 #import "CNCQueryCell.h"
-
 
 @interface CNCQueryViewController ()<QMUITableViewDelegate, QMUITableViewDataSource>
 
@@ -23,11 +24,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [CNCNotification cnc_addObserver:self selector:@selector(cnc_reloadData) name:kRELOADDATA];
 }
 
 - (void)setUI {
     [self.view addSubview:self.queryView];
+}
+
+- (void)cnc_reloadData {
+    [self.queryView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -56,7 +61,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView qmui_clearsSelection];
-    
+    CNCApplicationViewController *application = [[CNCApplicationViewController alloc] init];
+    application.accountModel = CNCSQL.accountModels[indexPath.row];
+    [self.navigationController pushViewController:application animated:YES];
 }
 
 - (CNCQueryView *)queryView {
@@ -66,6 +73,10 @@
         _queryView.delegate = self;
     }
     return _queryView;
+}
+
+- (void)dealloc {
+    [CNCNotification cnc_removeObserver:self name:kRELOADDATA];
 }
 
 @end

@@ -27,5 +27,6 @@
 #import "Connect_UserDefaults.h"
 #import "Connect_SQL.h"
 #import "Connect_Font.h"
+#import "Connect_NotificationName.h"
 
 #endif /* Connect_Header_h */
