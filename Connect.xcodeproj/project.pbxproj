@@ -238,6 +238,18 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		92BA1E69214AB41600C1F7A3 /* Connect_PCH */ = {
+			isa = PBXGroup;
+			children = (
+				92FE1712213BBD1D00FB238A /* Connect_NSLog.h */,
+				92FE1742213BFD2700FB238A /* Connect_UserDefaults.h */,
+				92FE1751213CE94A00FB238A /* Connect_SQL.h */,
+				92266E572143B07D00314435 /* Connect_Font.h */,
+				92BA1E68214A6E6E00C1F7A3 /* Connect_NotificationName.h */,
+			);
+			path = Connect_PCH;
+			sourceTree = "<group>";
+		};
 		92D423DC2146868300C9F915 /* SettingModul */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,11 +418,7 @@
 			children = (
 				92FE16E3213BAE8600FB238A /* Connect.pch */,
 				92FE1701213BB25D00FB238A /* Connect_Header.h */,
-				92FE1712213BBD1D00FB238A /* Connect_NSLog.h */,
-				92FE1742213BFD2700FB238A /* Connect_UserDefaults.h */,
-				92FE1751213CE94A00FB238A /* Connect_SQL.h */,
-				92266E572143B07D00314435 /* Connect_Font.h */,
-				92BA1E68214A6E6E00C1F7A3 /* Connect_NotificationName.h */,
+				92BA1E69214AB41600C1F7A3 /* Connect_PCH */,
 			);
 			path = PCH;
 			sourceTree = "<group>";

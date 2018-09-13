@@ -14,19 +14,16 @@
 #import <objc/runtime.h>
 
 /** UI */
-#import <QMUIKit.h>
-#import <MJRefresh.h>
-#import <Masonry.h>
-
-/** Network */
-#import <YYModel.h>
+#import <QMUIKit.h>//基础库,深度依赖
+#import <MJRefresh.h>//刷新
+#import <Masonry.h>//自动布局
 
 /** Other */
-#import <YYCategories.h>
-#import "Connect_NSLog.h"
-#import "Connect_UserDefaults.h"
-#import "Connect_SQL.h"
-#import "Connect_Font.h"
-#import "Connect_NotificationName.h"
+#import <YYCategories.h>//分类
+#import "Connect_NSLog.h"//debug模式下的输出
+#import "Connect_UserDefaults.h"//偏好设置
+#import "Connect_SQL.h"//sql数据库
+#import "Connect_Font.h"//字体
+#import "Connect_NotificationName.h"//通知名
 
 #endif /* Connect_Header_h */
