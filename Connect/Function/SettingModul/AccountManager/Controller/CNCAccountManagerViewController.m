@@ -11,6 +11,7 @@
 #import "CNCCreateAccountViewController.h"
 #import "CNCAccountManagerView.h"
 #import "CNCAccountManagerCell.h"
+#import "CNCNotification.h"
 #import "CNCSQLManager.h"
 
 @interface CNCAccountManagerViewController ()<QMUITableViewDelegate, QMUITableViewDataSource>
@@ -23,21 +24,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)setupNavigationItems {
+    [super setupNavigationItems];
     self.title = @"账号管理";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem qmui_itemWithTitle:@"添加" target:self action:@selector(cnc_addAccountDidClick)];
 }
 
 - (void)setUI {
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem qmui_itemWithTitle:@"添加" target:self action:@selector(cnc_addAccountDidClick)];
-    [self.view addSubview:self.managerTableView];
+     [self.view addSubview:self.managerTableView];
 }
 
 - (void)cnc_addAccountDidClick {
-    CNCCreateAccountViewController *create = [[CNCCreateAccountViewController alloc] init];
-    __weak __typeof(self)weakSelf = self;
-    create.cnc_updateAccountTableView = ^{
-        [weakSelf.managerTableView reloadData];
-    };
-    [self.navigationController pushViewController:create animated:YES];
+    [self cnc_pushCreateAccountViewControllerForRowAtIndexPath:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -80,37 +80,57 @@
         QMUIAlertController *alert = [QMUIAlertController alertControllerWithTitle:@"" message:@"是否确定删除此账号?" preferredStyle:QMUIAlertControllerStyleAlert];
         [alert addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
             [CNCSQL cnc_deleteForAccountSQLTableWithModel:model];
+            [CNCNotification cnc_postNotificationName:kACCOUNTDATACHANGE object:indexPath];
             [weakSelf.managerTableView deleteSection:indexPath.section withRowAnimation:UITableViewRowAnimationFade];
         }]];
         [alert addCancelAction];
         [alert showWithAnimated:YES];
     }];
     UITableViewRowAction *edit = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
+        [weakSelf cnc_pushCreateAccountViewControllerForRowAtIndexPath:indexPath];
     }];
+    edit.backgroundColor = UIColorBlue;
     return @[delete, edit];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView qmui_clearsSelection];
-    
+    [self cnc_pushCreateAccountViewControllerForRowAtIndexPath:indexPath];
+}
+
+- (void)cnc_pushCreateAccountViewControllerForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak __typeof(self)weakSelf = self;
+    CNCCreateAccountViewController *create = [[CNCCreateAccountViewController alloc] init];
+    create.cnc_accountOperateTypeCallBack = ^(CNCAccountOperateType operateType) {
+        if (operateType == CNCAccountOperateTypeCreate) {
+            [weakSelf.managerTableView insertSection:0 withRowAnimation:UITableViewRowAnimationFade];
+            [CNCNotification cnc_postNotificationName:kACCOUNTDATACHANGE];
+        }else {
+            [weakSelf.managerTableView moveSection:indexPath.section toSection:0];
+            [weakSelf.managerTableView reloadSection:0 withRowAnimation:UITableViewRowAnimationFade];
+            [CNCNotification cnc_postNotificationName:kACCOUNTDATACHANGE object:@(indexPath.section)];
+        }
+    };
+    if (indexPath) {
+        create.title = @"编辑账号信息";
+        create.accountModel = CNCSQL.accountModels[indexPath.section];
+    }else {
+        create.title = @"新建账号";
+        create.accountModel = nil;
+    }
+    [self.navigationController pushViewController:create animated:YES];
 }
 
 - (CNCAccountManagerView *)managerTableView {
     if (!_managerTableView) {
         _managerTableView = [[CNCAccountManagerView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-        _managerTableView.dataSource = self;
-        _managerTableView.delegate = self;
         _managerTableView.sectionFooterHeight = CGFLOAT_MIN;
         _managerTableView.sectionHeaderHeight = 10.f;
+        _managerTableView.dataSource = self;
+        _managerTableView.delegate = self;
         _managerTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     }
     return _managerTableView;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
 }
 
 @end

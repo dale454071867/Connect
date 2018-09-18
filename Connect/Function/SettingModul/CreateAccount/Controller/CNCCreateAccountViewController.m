@@ -21,14 +21,19 @@
 
 @property(nonatomic, strong) CNCCreateAccountModel *model;
 
+@property(nonatomic, copy) NSArray<NSString *> *texts;
+
 @end
 
 @implementation CNCCreateAccountViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"添加";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem qmui_itemWithTitle:@"保存" target:self action:@selector(cnc_saveDidClick)];;
+}
+
+- (void)setupNavigationItems {
+    [super setupNavigationItems];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem qmui_itemWithTitle:@"保存" target:self action:@selector(cnc_saveDidClick)];
 }
 
 - (void)setUI {
@@ -45,7 +50,7 @@
         result = value.length;
         if (result) {
             BOOL *b = stop;
-            if (idx == 0) {
+            if (idx == 0 && !weakSelf.accountModel) {
                 [CNCSQL.accountModels enumerateObjectsUsingBlock:^(CNCAccountModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     if ([value isEqualToString:obj.email]) {
                         *b = YES;
@@ -69,10 +74,13 @@
     }];
     if (result) {
         [model setValue:[NSDate cnc_currentDate] forKey:@"lastTime"];
-        [CNCSQL cnc_putToAccountSQLTableWithModel:model];
-        [CNCNotification cnc_postNotificationName:kQUERYRELOADDATA];
-        if (self.cnc_updateAccountTableView) {
-            self.cnc_updateAccountTableView();
+        if (self.accountModel) {
+            [CNCSQL cnc_editForAccountSQLTableWithModel:model];
+        }else{
+            [CNCSQL cnc_putToAccountSQLTableWithModel:model];
+        }
+        if (self.cnc_accountOperateTypeCallBack) {
+            self.cnc_accountOperateTypeCallBack(self.accountModel?CNCAccountOperateTypeEdit:CNCAccountOperateTypeCreate);
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
@@ -92,6 +100,11 @@
     if (!cell) {
         cell = [[CNCCreateAccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    if (self.accountModel) {
+        cell.content.enabled = indexPath.row;
+        cell.content.text = self.texts[indexPath.row];
+    }
+    
     CNCCreateAccountModel *model = self.model.models[indexPath.row];
     cell.title.text = [NSString stringWithFormat:@"%@:", model.title];
     cell.content.placeholder = [NSString stringWithFormat:@"请在当前位置输入%@内容", model.title];
@@ -118,6 +131,13 @@
         _model = [CNCCreateAccountModel new];
     }
     return _model;
+}
+
+- (NSArray<NSString *> *)texts {
+    if (!_texts) {
+        _texts = @[self.accountModel.email, self.accountModel.developer_password, self.accountModel.mark];
+    }
+    return _texts;
 }
 
 @end

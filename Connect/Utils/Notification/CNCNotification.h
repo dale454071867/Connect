@@ -28,6 +28,14 @@
 + (void)cnc_postNotificationName:(NSNotificationName)notificationName;
 
 /**
+ 发送通知
+
+ @param notificationName 通知名
+ @param object 发送的对象
+ */
++ (void)cnc_postNotificationName:(NSNotificationName)notificationName object:(id)object;
+
+/**
  移除通知
 
  @param observer 移除监听通知的对象

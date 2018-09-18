@@ -45,7 +45,10 @@
 
 - (void)cnc_putToAccountSQLTableWithModel:(CNCAccountModel *)model {
     [self.accountStore putObject:model.yy_modelToJSONObject withId:model.email intoTable:kACCOUNTSQLTABLENAME];
-    self.accountModels = [self.accountModels arrayByAddingObject:model];
+    NSMutableArray<CNCAccountModel *> *arrM = [NSMutableArray arrayWithArray:self.accountModels];
+    [arrM insertObject:model atIndex:0];
+    self.accountModels = arrM;
+    arrM = nil;
 }
 
 - (void)cnc_deleteForAccountSQLTableWithModel:(CNCAccountModel *)model {
@@ -54,6 +57,11 @@
     [arrM removeObject:model];
     self.accountModels = arrM;
     arrM = nil;
+}
+
+- (void)cnc_editForAccountSQLTableWithModel:(CNCAccountModel *)model {
+    [self.accountStore putObject:model.yy_modelToJSONObject withId:model.email intoTable:kACCOUNTSQLTABLENAME];
+    self.accountModels = nil;
 }
 
 - (NSArray<CNCAccountModel *> *)accountModels {

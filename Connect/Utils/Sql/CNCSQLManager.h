@@ -34,4 +34,11 @@
  */
 - (void)cnc_deleteForAccountSQLTableWithModel:(CNCAccountModel *)model;
 
+/**
+ 修改账号信息
+
+ @param model 账号模型
+ */
+- (void)cnc_editForAccountSQLTableWithModel:(CNCAccountModel *)model;
+
 @end

@@ -15,6 +15,7 @@
 		925423242139154900F25530 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 925423232139154900F25530 /* main.m */; };
 		9291005E2147C098007ADCC2 /* CNCApplicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9291005D2147C098007ADCC2 /* CNCApplicationModel.m */; };
 		92BA1E67214A6B4800C1F7A3 /* CNCNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BA1E66214A6B4800C1F7A3 /* CNCNotification.m */; };
+		92BA1E8E214CD88500C1F7A3 /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 92BA1E8D214CD88500C1F7A3 /* logo2.png */; };
 		92D423E22146874A00C9F915 /* CNCQueryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423E12146874A00C9F915 /* CNCQueryViewController.m */; };
 		92D423E62146891C00C9F915 /* CNCQueryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423E52146891C00C9F915 /* CNCQueryView.m */; };
 		92D423EC2146896500C9F915 /* CNCCreateAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D423EB2146896500C9F915 /* CNCCreateAccountView.m */; };
@@ -75,6 +76,7 @@
 		92BA1E65214A6B4800C1F7A3 /* CNCNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCNotification.h; sourceTree = "<group>"; };
 		92BA1E66214A6B4800C1F7A3 /* CNCNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCNotification.m; sourceTree = "<group>"; };
 		92BA1E68214A6E6E00C1F7A3 /* Connect_NotificationName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Connect_NotificationName.h; sourceTree = "<group>"; };
+		92BA1E8D214CD88500C1F7A3 /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo2.png; sourceTree = "<group>"; };
 		92D423E02146874A00C9F915 /* CNCQueryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCQueryViewController.h; sourceTree = "<group>"; };
 		92D423E12146874A00C9F915 /* CNCQueryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCQueryViewController.m; sourceTree = "<group>"; };
 		92D423E42146891C00C9F915 /* CNCQueryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCQueryView.h; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		92E3116D213F79D70095F1CC /* CNCCreateAccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCCreateAccountModel.m; sourceTree = "<group>"; };
 		92E3116F213F7B580095F1CC /* CNCCreateAccountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCCreateAccountCell.h; sourceTree = "<group>"; };
 		92E31170213F7B580095F1CC /* CNCCreateAccountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCCreateAccountCell.m; sourceTree = "<group>"; };
+		92FDA7E92150CA7E0039B339 /* Connect_Enum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Connect_Enum.h; sourceTree = "<group>"; };
 		92FE16E3213BAE8600FB238A /* Connect.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Connect.pch; sourceTree = "<group>"; };
 		92FE16E8213BAF5C00FB238A /* AppDelegate+CNCExtenison.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+CNCExtenison.h"; sourceTree = "<group>"; };
 		92FE16E9213BAF5C00FB238A /* AppDelegate+CNCExtenison.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+CNCExtenison.m"; sourceTree = "<group>"; };
@@ -246,6 +249,7 @@
 				92FE1751213CE94A00FB238A /* Connect_SQL.h */,
 				92266E572143B07D00314435 /* Connect_Font.h */,
 				92BA1E68214A6E6E00C1F7A3 /* Connect_NotificationName.h */,
+				92FDA7E92150CA7E0039B339 /* Connect_Enum.h */,
 			);
 			path = Connect_PCH;
 			sourceTree = "<group>";
@@ -406,6 +410,7 @@
 				92FE1721213BD8BA00FB238A /* Language */,
 				92FE16E2213BAE5C00FB238A /* PCH */,
 				9254231D2139154900F25530 /* Assets.xcassets */,
+				92BA1E8D214CD88500C1F7A3 /* logo2.png */,
 				925423222139154900F25530 /* Info.plist */,
 				925423232139154900F25530 /* main.m */,
 				92FE172F213BDAA300FB238A /* Launch Screen.storyboard */,
@@ -806,6 +811,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92FE1730213BDAA300FB238A /* Launch Screen.storyboard in Resources */,
+				92BA1E8E214CD88500C1F7A3 /* logo2.png in Resources */,
 				9254231E2139154900F25530 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

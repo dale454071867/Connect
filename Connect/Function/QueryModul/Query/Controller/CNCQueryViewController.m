@@ -24,15 +24,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [CNCNotification cnc_addObserver:self selector:@selector(cnc_reloadData) name:kQUERYRELOADDATA];
+    [CNCNotification cnc_addObserver:self selector:@selector(cnc_accountDataChange:) name:kACCOUNTDATACHANGE];
+}
+
+- (void)setupNavigationItems {
+    [super setupNavigationItems];
 }
 
 - (void)setUI {
     [self.view addSubview:self.queryView];
 }
 
-- (void)cnc_reloadData {
-    [self.queryView reloadData];
+- (void)cnc_accountDataChange:(NSNotification *)cation {
+    if (!cation.object) {
+        [self.queryView insertRowAtIndexPath:[self cnc_getIndexPath:0] withRowAnimation:UITableViewRowAnimationFade];
+    }else if ([cation.object isKindOfClass:[NSIndexPath class]]) {
+        [self.queryView deleteRowAtIndexPath:[self cnc_getIndexPath:[cation.object row]] withRowAnimation:UITableViewRowAnimationFade];
+    }else if ([cation.object isKindOfClass:[NSNumber class]]) {
+        NSIndexPath *first = [self cnc_getIndexPath:0];
+        [self.queryView moveRowAtIndexPath:[self cnc_getIndexPath:[cation.object integerValue]] toIndexPath:first];
+        [self.queryView reloadRowAtIndexPath:first withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (NSIndexPath *)cnc_getIndexPath:(NSInteger)idx {
+    return [NSIndexPath indexPathForRow:idx inSection:0];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -76,7 +92,7 @@
 }
 
 - (void)dealloc {
-    [CNCNotification cnc_removeObserver:self name:kQUERYRELOADDATA];
+    [CNCNotification cnc_removeObserver:self name:kACCOUNTDATACHANGE];
 }
 
 @end

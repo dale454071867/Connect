@@ -10,8 +10,8 @@
 #ifndef Connect_NotificationName_h
 #define Connect_NotificationName_h
 
-/** 查询界面刷新通知 */
-static NSString * const kQUERYRELOADDATA = @"cnc_reloadData";
+/** 账号数据发生改变 */
+static NSString * const kACCOUNTDATACHANGE = @"cnc_accountDataChange";
 
 
 #endif /* Connect_NotificationName_h */

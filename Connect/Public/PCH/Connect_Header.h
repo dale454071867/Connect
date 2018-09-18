@@ -25,5 +25,6 @@
 #import "Connect_SQL.h"//sql数据库
 #import "Connect_Font.h"//字体
 #import "Connect_NotificationName.h"//通知名
+#import "Connect_Enum.h"//枚举
 
 #endif /* Connect_Header_h */

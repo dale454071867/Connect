@@ -17,6 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)setupNavigationItems {
+    [super setupNavigationItems];
     self.title = @"忽略的Apps";
 }
 

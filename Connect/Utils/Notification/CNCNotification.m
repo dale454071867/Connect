@@ -19,6 +19,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil];
 }
 
++ (void)cnc_postNotificationName:(NSNotificationName)notificationName object:(id)object {
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:object];
+}
+
 + (void)cnc_removeObserver:(id)observer name:(NSNotificationName)notificationName {
     [[NSNotificationCenter defaultCenter] removeObserver:observer name:notificationName object:nil];
 }

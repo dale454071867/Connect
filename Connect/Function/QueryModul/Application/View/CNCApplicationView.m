@@ -11,6 +11,8 @@
 
 @implementation CNCApplicationView
 
-
+- (void)loadView {
+    self.backgroundColor = QMUICMI.backgroundColor;
+}
 
 @end
