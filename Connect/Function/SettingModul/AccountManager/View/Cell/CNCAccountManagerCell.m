@@ -18,9 +18,9 @@
     self.emailLabel.font = CNCAmericanTypewriterBold;
     [self.contentView addSubview:self.emailLabel];
     [self.emailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.offset(15);
-        make.topMargin.offset(5);
-        make.rightMargin.offset(-5);
+        make.left.equalTo(self.contentView.mas_left).offset(15);
+        make.top.equalTo(self.contentView.mas_top).offset(5);
+        make.right.equalTo(self.contentView.mas_right).offset(-5);
     }];
 
     self.markLabel = [[QMUILabel alloc] init];
@@ -29,7 +29,7 @@
     [self.contentView addSubview:self.markLabel];
     [self.markLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.emailLabel);
-        make.bottomMargin.offset(-5);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-5);
         make.right.equalTo(self.emailLabel);
     }];
     

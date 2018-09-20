@@ -17,6 +17,10 @@
 
 @property(nonatomic, strong) CNCApplicationView *applicationView;
 
+@property(nonatomic, strong) CNCApplicationCell *currentCell;
+
+@property(nonatomic, strong) NSMutableArray *arr;
+
 @end
 
 static NSString *const kIdentifier = @"cell";
@@ -51,7 +55,7 @@ static NSString *const kIdentifier = @"cell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 2;
+    return self.arr.count;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,7 +64,7 @@ static NSString *const kIdentifier = @"cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CNCApplicationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kIdentifier forIndexPath:indexPath];
-    cell.appName.text = @"测试名称";
+    cell.appName.text = [NSString stringWithFormat:@"测试名称----%ld", indexPath.row];
     cell.lastTime.text = @"17小时前";
     cell.appVerison1Activity.backgroundColor = UIColorGreen;
     cell.appVersion1.text = @"1.0.1";
@@ -72,10 +76,28 @@ static NSString *const kIdentifier = @"cell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView qmui_clearsSelection];
+    [self.currentCell cnc_hiddenRemoveCellOption];
 }
 
-- (void)cnc_applicationCell:(CNCApplicationCell *)cell state:(CNCApplicationCellState)state point:(CGPoint)point {
-    NSLog(@"%@", NSStringFromCGPoint(point));
+- (void)cnc_applicationDidScrollCell:(CNCApplicationCell *)cell {
+    if (self.currentCell) {
+        [self.currentCell cnc_hiddenRemoveCellOption];
+        self.currentCell = cell;
+    }else if (!self.currentCell) {
+        self.currentCell = cell;
+    }
+}
+
+- (void)cnc_applicationDidSelectRemoveCell:(CNCApplicationCell *)cell {
+    [cell cnc_hiddenRemoveCellOption];
+    QMUIAlertController *alert = [QMUIAlertController alertControllerWithTitle:@"您是否要隐藏此App" message:@"当您选择隐藏后,下次查询时此App将不会出现在您的App列表中,但是您可以通过设置中的选项来使被隐藏的App再次显示." preferredStyle:QMUIAlertControllerStyleAlert];
+    __weak __typeof(self)weakSelf = self;
+    [alert addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
+        [weakSelf.arr removeLastObject];
+        [weakSelf.applicationView deleteItemsAtIndexPaths:@[[weakSelf.applicationView indexPathForCell:cell]]];
+    }]];
+    [alert addCancelAction];
+    [alert showWithAnimated:YES];
 }
 
 - (CNCApplicationView *)applicationView {
@@ -93,5 +115,14 @@ static NSString *const kIdentifier = @"cell";
     return _applicationView;
 }
 
+- (NSMutableArray *)arr {
+    if (!_arr) {
+        _arr = [NSMutableArray array];
+        for (int i = 0; i < 20; i ++) {
+            [_arr addObject:@""];
+        }
+    }
+    return _arr;
+}
 
 @end

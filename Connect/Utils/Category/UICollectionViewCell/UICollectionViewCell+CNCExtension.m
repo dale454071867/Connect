@@ -14,12 +14,12 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        ExchangeImplementations([self class], @selector(initWithFrame:), @selector(cnc_cell_initWithFrame:));
+        ExchangeImplementations([self class], @selector(initWithFrame:), @selector(cnc_cellinitWithFrame:));
     });
 }
 
-- (instancetype)cnc_cell_initWithFrame:(CGRect)frame {
-    UICollectionViewCell *cell = [self cnc_cell_initWithFrame:frame];
+- (instancetype)cnc_cellinitWithFrame:(CGRect)frame {
+    UICollectionViewCell *cell = [self cnc_cellinitWithFrame:frame];
     [self setCellINFO];
     return cell;
 }

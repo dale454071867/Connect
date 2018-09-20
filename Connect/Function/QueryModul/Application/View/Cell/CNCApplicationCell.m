@@ -2,12 +2,21 @@
 //  Connect
 //
 //  Created by Dwang on 2018/9/11.
-//	QQ群:	577506623
-//	GitHub:	https://github.com/CoderDwang
+//    QQ群:    577506623
+//    GitHub:    https://github.com/CoderDwang
 //  Copyright © 2018年 CoderDwang. All rights reserved.
 //
 
 #import "CNCApplicationCell.h"
+
+@interface CNCApplicationCell ()<UIGestureRecognizerDelegate>
+
+@property(nonatomic, strong) UIView *transfromView;
+
+/** 临时存储偏移量 */
+@property(nonatomic, assign) CGFloat tx;
+
+@end
 
 @implementation CNCApplicationCell
 
@@ -17,18 +26,42 @@
     selectedBackgroundView.backgroundColor = UIColorMakeWithRGBA(182, 182, 182, 0.4);
     self.selectedBackgroundView = selectedBackgroundView;
     
+    self.ignore = [[QMUIButton alloc] init];
+    [self.ignore addTarget:self action:@selector(ignoreDidClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:self.ignore];
+    [self.ignore mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+    [self.ignore layoutIfNeeded];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.ignore.bounds;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)UIColorRed.CGColor,
+                       (id)UIColorMakeWithRGBA(255, 0, 0, 0.5).CGColor,
+                       (id)[UIColor whiteColor].CGColor, nil];
+    gradient.startPoint = CGPointMake(0, 1);
+    gradient.endPoint = CGPointMake(1, 1);
+    [self.ignore.layer addSublayer:gradient];
+    
+    self.transfromView = [[UIView alloc] init];
+    self.transfromView.backgroundColor = UIColorWhite;
+    [self.contentView addSubview:self.transfromView];
+    [self.transfromView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+    
     self.backgroundColor = UIColorWhite;
     self.appIcon = [[UIImageView alloc] initWithImage:UIImageMake(@"logo2")];
-    [self.contentView addSubview:self.appIcon];
+    [self.transfromView addSubview:self.appIcon];
     [self.appIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.contentView);
+        make.centerY.equalTo(self.transfromView);
         make.leftMargin.offset(15);
-        make.size.equalTo(self.contentView.mas_height).offset(-10);
+        make.size.equalTo(self.transfromView.mas_height).offset(-10);
     }];
     
     self.appName = [[QMUILabel alloc] init];
     self.appName.font = UIFontMake(16);
-    [self.contentView addSubview:self.appName];
+    [self.transfromView addSubview:self.appName];
     [self.appName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.appIcon.mas_top).offset(5);
         make.left.equalTo(self.appIcon.mas_right).offset(10);
@@ -37,14 +70,14 @@
     self.lastTime = [[QMUILabel alloc] init];
     self.lastTime.font = UIFontMake(12);
     self.lastTime.textColor = UIColorGrayLighten;
-    [self.contentView addSubview:self.lastTime];
+    [self.transfromView addSubview:self.lastTime];
     [self.lastTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.appIcon.mas_centerY).offset(2.5);
         make.left.equalTo(self.appName);
     }];
     
     self.appVerison1Activity = [[UIView alloc] init];
-    [self.contentView addSubview:self.appVerison1Activity];
+    [self.transfromView addSubview:self.appVerison1Activity];
     [self.appVerison1Activity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_offset(10);
         make.left.equalTo(self.appName.mas_left);
@@ -56,14 +89,14 @@
     self.appVersion1 = [[QMUILabel alloc] init];
     self.appVersion1.textColor = UIColorGray;
     self.appVersion1.font = UIFontMake(12);
-    [self.contentView addSubview:self.appVersion1];
+    [self.transfromView addSubview:self.appVersion1];
     [self.appVersion1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.appVerison1Activity.mas_right).offset(5);
         make.centerY.equalTo(self.appVerison1Activity);
     }];
     
     self.appVerison2Activity = [[UIView alloc] init];
-    [self.contentView addSubview:self.appVerison2Activity];
+    [self.transfromView addSubview:self.appVerison2Activity];
     [self.appVerison2Activity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(self.appVerison1Activity);
         make.left.equalTo(self.appVersion1.mas_right).offset(20);
@@ -74,18 +107,70 @@
     self.appVersion2 = [[QMUILabel alloc] init];
     self.appVersion2.textColor = UIColorGray;
     self.appVersion2.font = UIFontMake(12);
-    [self.contentView addSubview:self.appVersion2];
+    [self.transfromView addSubview:self.appVersion2];
     [self.appVersion2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.appVerison2Activity.mas_right).offset(5);
         make.centerY.equalTo(self.appVerison2Activity);
     }];
+    
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesterDidPan:)];
-    [self addGestureRecognizer:panGesture];
+    panGesture.delegate = self;
+    [self.transfromView addGestureRecognizer:panGesture];
 }
 
 - (void)panGesterDidPan:(UIPanGestureRecognizer *)panGesture {
-    if (self.delegate && [((id)self.delegate) respondsToSelector:@selector(cnc_applicationCell:state:point:)]) {
-        [self.delegate cnc_applicationCell:self state:(NSInteger)panGesture.state point:[panGesture translationInView:self]];
+    CGFloat x = [panGesture translationInView:self].x+self.tx;
+    __weak __typeof(self)weakSelf = self;
+    if (panGesture.state == UIGestureRecognizerStateBegan) {
+        self.tx = self.transfromView.transform.tx;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(cnc_applicationDidScrollCell:)]) {
+            [self.delegate cnc_applicationDidScrollCell:self];
+        }
+    }else if ((panGesture.state == UIGestureRecognizerStateEnded ||
+               panGesture.state == UIGestureRecognizerStateCancelled)
+              ) {
+        if (x <= -(SCREEN_WIDTH/2)) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(cnc_applicationDidSelectRemoveCell:)]) {
+                [self.delegate cnc_applicationDidSelectRemoveCell:self];
+            }
+        }else if (x <= -100) {
+            [weakSelf cnc_changeCellTransform:-100];
+        }else {
+            [self cnc_hiddenRemoveCellOption];
+        }
+    }else {
+        if (x > 0) {
+            [self cnc_hiddenRemoveCellOption];
+        }else if (ABS(x) > SCREEN_WIDTH/2) {
+            [self cnc_changeCellTransform:-SCREEN_WIDTH];
+        }else if(ABS(x) < SCREEN_WIDTH/2) {
+            [self cnc_changeCellTransform:x];
+        }
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)cnc_changeCellTransform:(CGFloat)x {
+    __weak __typeof(self)weakSelf = self;
+    [UIView animateWithDuration:.25f animations:^{
+        weakSelf.transfromView.transform = CGAffineTransformMakeTranslation(x, 0);
+    }];
+}
+
+- (void)cnc_hiddenRemoveCellOption {
+    __weak __typeof(self)weakSelf = self;
+    [UIView animateWithDuration:.25f animations:^{
+        weakSelf.transfromView.transform = CGAffineTransformIdentity;
+    }];
+}
+
+- (void)ignoreDidClick {
+    NSLog(@"按钮被点击");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cnc_applicationDidSelectRemoveCell:)]) {
+        [self.delegate cnc_applicationDidSelectRemoveCell:self];
     }
 }
 
@@ -99,3 +184,4 @@
 }
 
 @end
+

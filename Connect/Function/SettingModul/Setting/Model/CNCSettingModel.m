@@ -63,7 +63,7 @@
 
 - (NSString *)cnc_getCacheSize {
     NSString *cacheSize = @"";
-    CGFloat size = [DWNetworking getCachesSize];
+    CGFloat size = [DWNetworking getCachesSize]-36;
     if (size >= 1024*1024) {
         cacheSize = [NSString stringWithFormat:@"%.fGB", size/(1024*1024)];
     }else if (size > 1024) {
