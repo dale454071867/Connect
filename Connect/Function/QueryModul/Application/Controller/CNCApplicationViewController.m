@@ -7,10 +7,12 @@
 //  Copyright © 2018年 CoderDwang. All rights reserved.
 //
 
+#import "CNCQueryOptionViewController.h"
 #import "CNCApplicationViewController.h"
 #import "CNCApplicationModel.h"
 #import "CNCApplicationView.h"
 #import "CNCApplicationCell.h"
+#import "CNCAnimationLabel.h"
 #import "CNCAccountModel.h"
 
 @interface CNCApplicationViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, QMUINavigationTitleViewDelegate, CNCApplicationCellDelegate>
@@ -77,6 +79,8 @@ static NSString *const kIdentifier = @"cell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView qmui_clearsSelection];
     [self.currentCell cnc_hiddenRemoveCellOption];
+    CNCQueryOptionViewController *queryOptions = [[CNCQueryOptionViewController alloc] init];
+    [self.navigationController pushViewController:queryOptions animated:YES];
 }
 
 - (void)cnc_applicationDidScrollCell:(CNCApplicationCell *)cell {

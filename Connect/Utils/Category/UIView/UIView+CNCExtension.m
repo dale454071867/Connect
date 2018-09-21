@@ -27,4 +27,18 @@
 - (void)loadView {
 }
 
+- (void)cnc_setGradientColors:(NSArray <UIColor *>*)colors {
+    [self layoutIfNeeded];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.bounds;
+    NSMutableArray *gradientColors = [NSMutableArray array];
+    [colors enumerateObjectsUsingBlock:^(UIColor * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [gradientColors addObject:obj];
+    }];
+    gradient.colors = gradientColors;
+    gradient.startPoint = CGPointMake(0, 1);
+    gradient.endPoint = CGPointMake(1, 1);
+    [self.layer addSublayer:gradient];
+}
+
 @end

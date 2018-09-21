@@ -8,6 +8,8 @@
 //
 
 #import "CNCApplicationCell.h"
+#import "CNCAnimationLabel.h"
+#import "UIView+CNCExtension.h"
 
 @interface CNCApplicationCell ()<UIGestureRecognizerDelegate>
 
@@ -22,26 +24,15 @@
 
 - (void)setCellINFO {
     
-    UIView *selectedBackgroundView = UIView.new;
-    selectedBackgroundView.backgroundColor = UIColorMakeWithRGBA(182, 182, 182, 0.4);
-    self.selectedBackgroundView = selectedBackgroundView;
-    
     self.ignore = [[QMUIButton alloc] init];
     [self.ignore addTarget:self action:@selector(ignoreDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:self.ignore];
     [self.ignore mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView);
     }];
-    [self.ignore layoutIfNeeded];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = self.ignore.bounds;
-    gradient.colors = [NSArray arrayWithObjects:
-                       (id)UIColorRed.CGColor,
-                       (id)UIColorMakeWithRGBA(255, 0, 0, 0.5).CGColor,
-                       (id)[UIColor whiteColor].CGColor, nil];
-    gradient.startPoint = CGPointMake(0, 1);
-    gradient.endPoint = CGPointMake(1, 1);
-    [self.ignore.layer addSublayer:gradient];
+    [self.ignore cnc_setGradientColors:@[(id)UIColorRed.CGColor,
+     (id)UIColorMakeWithRGBA(255, 0, 0, 0.5).CGColor,
+     (id)[UIColor whiteColor].CGColor]];
     
     self.transfromView = [[UIView alloc] init];
     self.transfromView.backgroundColor = UIColorWhite;
@@ -58,13 +49,15 @@
         make.leftMargin.offset(15);
         make.size.equalTo(self.transfromView.mas_height).offset(-10);
     }];
+    [self.appIcon layoutIfNeeded];
     
-    self.appName = [[QMUILabel alloc] init];
-    self.appName.font = UIFontMake(16);
+    self.appName = [[CNCAnimationLabel alloc] init];
+    self.appName.fontSize = 16;
+    self.appName.fill = YES;
     [self.transfromView addSubview:self.appName];
     [self.appName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.appIcon.mas_top).offset(5);
-        make.left.equalTo(self.appIcon.mas_right).offset(10);
+        make.top.equalTo(self.appIcon.mas_top).offset(20);
+        make.left.equalTo(self.appIcon.mas_right).offset(self.appIcon.height-12);
     }];
     
     self.lastTime = [[QMUILabel alloc] init];
@@ -73,14 +66,14 @@
     [self.transfromView addSubview:self.lastTime];
     [self.lastTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.appIcon.mas_centerY).offset(2.5);
-        make.left.equalTo(self.appName);
+        make.left.equalTo(self.appIcon.mas_right).offset(10);
     }];
     
     self.appVerison1Activity = [[UIView alloc] init];
     [self.transfromView addSubview:self.appVerison1Activity];
     [self.appVerison1Activity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_offset(10);
-        make.left.equalTo(self.appName.mas_left);
+        make.left.equalTo(self.lastTime.mas_left);
         make.bottom.equalTo(self.appIcon.mas_bottom).offset(-5);
     }];
     [self cnc_roundWithView:self.appVerison1Activity];

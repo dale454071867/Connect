@@ -11,4 +11,11 @@
 
 @interface UIView (CNCExtension)
 
+/**
+ 渐变色
+
+ @param colors 色值
+ */
+- (void)cnc_setGradientColors:(NSArray <UIColor *>*)colors;
+
 @end
