@@ -21,9 +21,14 @@
 - (void)cnc_viewDidLoad {
     [self cnc_viewDidLoad];
     [self setUI];
+    [self setNetwork];
 }
 
 - (void)setUI {
+    
+}
+
+- (void)setNetwork {
     
 }
 

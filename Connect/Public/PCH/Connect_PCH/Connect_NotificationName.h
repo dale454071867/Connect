@@ -13,5 +13,7 @@
 /** 账号数据发生改变 */
 static NSString * const kACCOUNTDATACHANGE = @"cnc_accountDataChange";
 
+/** 请求失败 */
+static NSString * const kREQUESTERROR = @"cnc_requestError";
 
 #endif /* Connect_NotificationName_h */

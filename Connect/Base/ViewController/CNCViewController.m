@@ -8,6 +8,7 @@
 //
 
 #import "CNCViewController.h"
+#import "CNCNotification.h"
 
 @interface CNCViewController ()
 
@@ -15,8 +16,18 @@
 
 @implementation CNCViewController
 
+- (void)didInitialize {
+    [super didInitialize];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [CNCNotification cnc_addObserver:self selector:@selector(cnc_requestError:) name:kREQUESTERROR];
+}
+
+- (void)cnc_requestError:(NSNotification *)cation {
+    [self.toastView showError:cation.object];
+    [self.toastView hideAnimated:YES afterDelay:2.25f];
 }
 
 - (QMUIToastView *)toastView {

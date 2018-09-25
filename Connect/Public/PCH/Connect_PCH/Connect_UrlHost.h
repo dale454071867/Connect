@@ -11,6 +11,6 @@
 #define Connect_UrlHost_h
 
 /** 登录开发者账号 */
-static NSString *const appleDevSiginUrlHost = @"";
+static NSString *const appleDevSiginUrlHost = @"https://idmsa.apple.com/appleauth/auth/signin";
 
 #endif /* Connect_UrlHost_h */

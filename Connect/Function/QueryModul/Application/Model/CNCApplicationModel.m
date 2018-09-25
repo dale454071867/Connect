@@ -8,6 +8,7 @@
 //
 
 #import "CNCApplicationModel.h"
+#import "CNCNotification.h"
 
 @interface CNCApplicationModel ()
 
@@ -18,10 +19,21 @@
 
 @implementation CNCApplicationModel
 
-- (void)cnc_postAppleDevSiginWithApple {
-    [CNCNetwork postUrl:appleDevSiginUrlHost params:@{} callBack:^(id success) {
-        
-    }];
+- (void)cnc_postAppleDevSiginWithAppleAccountName:(NSString *)accountName password:(NSString *)password {
+    __weak __typeof(self)weakSelf = self;
+    [CNCNetwork cnc_setSiginRequestHeader];
+    [CNCNetwork postUrl:appleDevSiginUrlHost params:@{@"accountName":accountName,
+                                                      @"password":password,
+                                                      @"rememberMe":@"true"}
+               callBack:^(id success) {
+                   if ([success[@"authType"] isEqualToString:@"sa"]) {
+                       if (weakSelf.cnc_siginCallBack) {
+                           weakSelf.cnc_siginCallBack();
+                       }
+                   }else {
+                       [CNCNotification cnc_postNotificationName:kREQUESTERROR object:[NSString stringWithFormat:@"登录失败\n%@", success]];
+                   }
+               }];
 }
 
 - (NSArray<CNCApplicationModel *> *)models {

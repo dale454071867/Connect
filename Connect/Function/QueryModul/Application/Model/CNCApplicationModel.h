@@ -14,4 +14,15 @@
 /** 数据模型 */
 @property(nonatomic, copy, readonly) NSArray<CNCApplicationModel *> *models;
 
+/** 登录成功 */
+@property(nonatomic, copy) void (^cnc_siginCallBack)(void);
+
+/**
+ 请求登录
+
+ @param accountName 账号
+ @param password 密码
+ */
+- (void)cnc_postAppleDevSiginWithAppleAccountName:(NSString *)accountName password:(NSString *)password;
+
 @end

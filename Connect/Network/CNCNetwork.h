@@ -12,10 +12,7 @@
 @interface CNCNetwork : NSObject
 
 /** 设置开发者中心登录请求头 */
-+ (void)cnc_setLoginRequestHeader;
-
-/** 设置七麦登录请求头 */
-+ (void)cnc_setQiMaiLoginRequestHeader;
++ (void)cnc_setSiginRequestHeader;
 
 /** 设置开发者中心查询请求头 */
 + (void)cnc_setQueryReuqestHeader;

@@ -23,6 +23,8 @@
 
 @property(nonatomic, strong) NSMutableArray *arr;
 
+@property(nonatomic, strong) CNCApplicationModel *model;
+
 @end
 
 static NSString *const kIdentifier = @"cell";
@@ -46,6 +48,15 @@ static NSString *const kIdentifier = @"cell";
 
 - (void)setUI {
     [self.view addSubview:self.applicationView];
+}
+
+- (void)setNetwork {
+    [self.toastView showLoading];
+    __weak __typeof(self)weakSelf = self;
+    [self.model cnc_postAppleDevSiginWithAppleAccountName:self.accountModel.email password:self.accountModel.developer_password];
+    self.model.cnc_siginCallBack = ^{
+        [weakSelf.toastView hideAnimated:YES];
+    };
 }
 
 - (void)didTouchTitleView:(QMUINavigationTitleView *)titleView isActive:(BOOL)isActive {
@@ -117,6 +128,13 @@ static NSString *const kIdentifier = @"cell";
         _applicationView.delegate = self;
     }
     return _applicationView;
+}
+
+- (CNCApplicationModel *)model {
+    if (!_model) {
+        _model = [[CNCApplicationModel alloc] init];
+    }
+    return _model;
 }
 
 - (NSMutableArray *)arr {
