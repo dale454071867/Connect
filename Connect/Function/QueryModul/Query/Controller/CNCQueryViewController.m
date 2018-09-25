@@ -40,7 +40,7 @@
     if (!cation.object) {
         [self.queryView insertRowAtIndexPath:[self cnc_getIndexPath:0] withRowAnimation:UITableViewRowAnimationFade];
     }else if ([cation.object isKindOfClass:[NSIndexPath class]]) {
-        [self.queryView deleteRowAtIndexPath:[self cnc_getIndexPath:[cation.object row]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.queryView deleteRowAtIndexPath:[self cnc_getIndexPath:[cation.object section]] withRowAnimation:UITableViewRowAnimationFade];
     }else if ([cation.object isKindOfClass:[NSNumber class]]) {
         NSIndexPath *firstPath = [self cnc_getIndexPath:0];
         [self.queryView moveRowAtIndexPath:[self cnc_getIndexPath:[cation.object integerValue]] toIndexPath:firstPath];
