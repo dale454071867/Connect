@@ -8,6 +8,10 @@
 //
 
 #import "CNCQueryOptionViewController.h"
+#import "CNCChanMasterViewController.h"
+#import "CNCDetailViewController.h"
+#import "CNCQiMaiViewController.h"
+#import "CNCReplyViewController.h"
 #import "CNCQueryOptionsModel.h"
 #import "CNCQueryOptionsCell.h"
 #import "CNCQueryOptionView.h"
@@ -49,6 +53,25 @@ static NSString *const kIdentifier = @"cell";
     CNCQueryOptionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kIdentifier forIndexPath:indexPath];
     cell.title.text = self.model.models[indexPath.row].title;
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *title = self.model.models[indexPath.row].title;
+    if (ISEqualToString(title, @"查看详情")) {
+        CNCDetailViewController *detail = [[CNCDetailViewController alloc] init];
+        [self.navigationController pushViewController:detail animated:YES];
+    }else if (ISEqualToString(title, @"反馈信息")) {
+        CNCReplyViewController *reply = [[CNCReplyViewController alloc] init];
+        [self.navigationController pushViewController:reply animated:YES];
+    }else if (ISEqualToString(title, @"AppStore")) {
+        
+    }else if (ISEqualToString(title, @"蝉大师")) {
+        CNCChanMasterViewController *chanMaster = [[CNCChanMasterViewController alloc] init];
+        [self.navigationController pushViewController:chanMaster animated:YES];
+    }else if (ISEqualToString(title, @"七麦数据")) {
+        CNCQiMaiViewController *qimai = [[CNCQiMaiViewController alloc] init];
+        [self.navigationController pushViewController:qimai animated:YES];
+    }
 }
 
 - (CNCQueryOptionView *)queryOptionView {

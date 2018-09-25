@@ -19,6 +19,14 @@
     [super viewDidLoad];
 }
 
+- (QMUIToastView *)toastView {
+    if (!_toastView) {
+        _toastView = [[QMUITips alloc] initWithView:self.view];
+        [self.view addSubview:_toastView];
+    }
+    return _toastView;
+}
+
 - (void)dealloc
 {
     [self willMoveToParentViewController:nil];

@@ -33,6 +33,7 @@
 
 - (void)setUI {
     [self.view addSubview:self.queryView];
+    
 }
 
 - (void)cnc_accountDataChange:(NSNotification *)cation {

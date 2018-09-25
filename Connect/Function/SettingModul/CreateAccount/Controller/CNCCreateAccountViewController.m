@@ -51,16 +51,25 @@
         if (result) {
             BOOL *b = stop;
             if (idx == 0 && !weakSelf.accountModel) {
-                [CNCSQL.accountModels enumerateObjectsUsingBlock:^(CNCAccountModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if ([value isEqualToString:obj.email]) {
-                        *b = YES;
-                        *stop = YES;
-                        result = NO;
-                        QMUIAlertController *alert = [[QMUIAlertController alloc] initWithTitle:nil message:@"当前账号已存在" preferredStyle:QMUIAlertControllerStyleAlert];
-                        [alert addCancelAction];
-                        [alert showWithAnimated:YES];
-                    }
-                }];
+                if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", kEMailRegular] evaluateWithObject:value]) {
+                    [CNCSQL.accountModels enumerateObjectsUsingBlock:^(CNCAccountModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if (ISEqualToString(value, obj.email)) {
+                            *b = YES;
+                            *stop = YES;
+                            result = NO;
+                            QMUIAlertController *alert = [[QMUIAlertController alloc] initWithTitle:nil message:@"当前输入的账号已存在" preferredStyle:QMUIAlertControllerStyleAlert];
+                            [alert addCancelAction];
+                            [alert showWithAnimated:YES];
+                        }
+                    }];
+                }else {
+                    *b = YES;
+                    *stop = YES;
+                    result = NO;
+                    QMUIAlertController *alert = [[QMUIAlertController alloc] initWithTitle:nil message:@"请输入正确的邮箱信息" preferredStyle:QMUIAlertControllerStyleAlert];
+                    [alert addCancelAction];
+                    [alert showWithAnimated:YES];
+                }
             }
             if (!*b) {
                 [model setValue:value forKey:obj.key];

@@ -64,13 +64,13 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.enabled = YES;
     [self cnc_setBackgroundImageWithColor:UIColorGray forObj:cell.subviews[1]];
-    if ([model.title isEqualToString:@"清除缓存"]) {
-        if ([model.detail isEqualToString:@"暂无缓存"]) {
+    if (ISEqualToString(model.title, @"清除缓存")) {
+        if (ISEqualToString(model.detail, @"暂无缓存")) {
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.enabled = NO;
         }
-    }else if ([model.title isEqualToString:@"隐藏等待提交状态的Apps"] ||
-        [model.title isEqualToString:@"显示等待提交状态的Apps"]) {
+    }else if (ISEqualToString(model.title, @"隐藏等待提交状态的Apps") ||
+              ISEqualToString(model.title, @"显示等待提交状态的Apps")) {
         [self cnc_updateWithCell:cell];
     }else {
         
@@ -82,16 +82,16 @@
     [tableView qmui_clearsSelection];
     __weak __typeof(self)weakSelf = self;
     CNCSettingModel *model = self.model.models[indexPath.section][indexPath.row];
-    if ([model.title isEqualToString:@"账号管理"]) {
+    if (ISEqualToString(model.title, @"账号管理")) {
         [self.navigationController pushViewController:[CNCAccountManagerViewController new] animated:YES];
-    }else if ([model.title isEqualToString:@"清除缓存"]) {
+    }else if (ISEqualToString(model.title, @"清除缓存")) {
         [self.model cnc_clearCacheWithCallBack:^{
             [weakSelf.settingTableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
         }];
-    }else if([model.title isEqualToString:@"忽略的Apps"]) {
+    }else if(ISEqualToString(model.title, @"忽略的Apps")) {
         [self.navigationController pushViewController:[CNCIgnoreAppsViewController new] animated:YES];
-    }else if ([model.title isEqualToString:@"隐藏等待提交状态的Apps"] ||
-              [model.title isEqualToString:@"显示等待提交状态的Apps"]) {
+    }else if (ISEqualToString(model.title, @"隐藏等待提交状态的Apps") ||
+              ISEqualToString(model.title, @"显示等待提交状态的Apps")) {
         [self.model cnc_updateHiddenPrepareForUploadCellWithCallBack:^{
             [weakSelf.settingTableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
         }];

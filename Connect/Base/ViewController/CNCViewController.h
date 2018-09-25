@@ -11,5 +11,7 @@
 
 @interface CNCViewController : QMUICommonViewController
 
+/** 活动指示器 */
+@property(nonatomic, strong) QMUITips *toastView;
 
 @end

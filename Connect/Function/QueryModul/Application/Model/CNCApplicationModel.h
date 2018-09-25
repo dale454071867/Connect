@@ -14,6 +14,4 @@
 /** 数据模型 */
 @property(nonatomic, copy, readonly) NSArray<CNCApplicationModel *> *models;
 
-
-
 @end

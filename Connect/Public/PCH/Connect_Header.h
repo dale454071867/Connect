@@ -13,6 +13,9 @@
 /** runtime */
 #import <objc/runtime.h>
 
+/** 网络 */
+#import "CNCNetwork.h"
+
 /** UI */
 #import <QMUIKit.h>//基础库,深度依赖
 #import <MJRefresh.h>//刷新
@@ -26,5 +29,8 @@
 #import "Connect_Font.h"//字体
 #import "Connect_NotificationName.h"//通知名
 #import "Connect_Enum.h"//枚举
+#import "Connect_Bool.h"//字符比较
+#import "Connect_UrlHost.h"//请求地址
+#import "Connect_Regular.h"//正则
 
 #endif /* Connect_Header_h */

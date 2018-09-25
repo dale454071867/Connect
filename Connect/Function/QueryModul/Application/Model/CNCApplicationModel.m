@@ -18,6 +18,12 @@
 
 @implementation CNCApplicationModel
 
+- (void)cnc_postAppleDevSiginWithApple {
+    [CNCNetwork postUrl:appleDevSiginUrlHost params:@{} callBack:^(id success) {
+        
+    }];
+}
+
 - (NSArray<CNCApplicationModel *> *)models {
     if (!_models) {
         _models = [NSArray array];
