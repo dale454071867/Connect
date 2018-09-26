@@ -9,6 +9,7 @@
 
 #import "CNCQueryOptionViewController.h"
 #import "CNCApplicationViewController.h"
+#import "UIImageView+CNCExtension.h"
 #import "CNCApplicationModel.h"
 #import "CNCApplicationView.h"
 #import "CNCApplicationCell.h"
@@ -20,8 +21,6 @@
 @property(nonatomic, strong) CNCApplicationView *applicationView;
 
 @property(nonatomic, strong) CNCApplicationCell *currentCell;
-
-@property(nonatomic, strong) NSMutableArray *arr;
 
 @property(nonatomic, strong) CNCApplicationModel *model;
 
@@ -53,9 +52,10 @@ static NSString *const kIdentifier = @"cell";
 - (void)setNetwork {
     [self.toastView showLoading];
     __weak __typeof(self)weakSelf = self;
-    [self.model cnc_postAppleDevSiginWithAppleAccountName:self.accountModel.email password:self.accountModel.developer_password];
-    self.model.cnc_siginCallBack = ^{
+    [self.model cnc_getApplicationStatusWithAccountName:self.accountModel.email password:self.accountModel.developer_password];
+    self.model.cnc_queryApplicationStatusCallBack = ^{
         [weakSelf.toastView hideAnimated:YES];
+        [weakSelf.applicationView reloadData];
     };
 }
 
@@ -68,7 +68,7 @@ static NSString *const kIdentifier = @"cell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.arr.count;
+    return self.model.models.count;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,8 +77,10 @@ static NSString *const kIdentifier = @"cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CNCApplicationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kIdentifier forIndexPath:indexPath];
-    cell.appName.text = [NSString stringWithFormat:@"测试名称----%ld", indexPath.row];
-    cell.lastTime.text = @"17小时前";
+    CNCApplicationModel *model = self.model.models[indexPath.row];
+    cell.appIcon.activity = model.iconUrl;
+    cell.appName.text = model.name;
+    cell.lastTime.text = model.lastModifiedDate;
     cell.appVerison1Activity.backgroundColor = UIColorGreen;
     cell.appVersion1.text = @"1.0.1";
     cell.appVerison2Activity.backgroundColor = UIColorRed;
@@ -108,8 +110,11 @@ static NSString *const kIdentifier = @"cell";
     QMUIAlertController *alert = [QMUIAlertController alertControllerWithTitle:@"您是否要隐藏此App" message:@"当您选择隐藏后,下次查询时此App将不会出现在您的App列表中,但是您可以通过设置中的选项来使被隐藏的App再次显示." preferredStyle:QMUIAlertControllerStyleAlert];
     __weak __typeof(self)weakSelf = self;
     [alert addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-        [weakSelf.arr removeLastObject];
-        [weakSelf.applicationView deleteItemsAtIndexPaths:@[[weakSelf.applicationView indexPathForCell:cell]]];
+        NSMutableArray *arrM = [NSMutableArray arrayWithArray:weakSelf.model.models];
+        NSIndexPath *indexPath = [weakSelf.applicationView indexPathForCell:cell];
+        [arrM removeObjectAtIndex:indexPath.row];
+        [weakSelf.model setValue:arrM forKey:@"models"];
+        [weakSelf.applicationView deleteItemsAtIndexPaths:@[indexPath]];
     }]];
     [alert addCancelAction];
     [alert showWithAnimated:YES];
@@ -135,16 +140,6 @@ static NSString *const kIdentifier = @"cell";
         _model = [[CNCApplicationModel alloc] init];
     }
     return _model;
-}
-
-- (NSMutableArray *)arr {
-    if (!_arr) {
-        _arr = [NSMutableArray array];
-        for (int i = 0; i < 20; i ++) {
-            [_arr addObject:@""];
-        }
-    }
-    return _arr;
 }
 
 @end

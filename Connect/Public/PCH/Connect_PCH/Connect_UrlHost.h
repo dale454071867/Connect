@@ -13,4 +13,7 @@
 /** 登录开发者账号 */
 static NSString *const appleDevSiginUrlHost = @"https://idmsa.apple.com/appleauth/auth/signin";
 
+/** 查询应用状态 */
+static NSString *const appleApplicationStatusUrlHost = @"https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/apps/manageyourapps/summary/v2";
+
 #endif /* Connect_UrlHost_h */

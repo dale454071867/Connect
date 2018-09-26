@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271D7600215BC07E006A3B84 /* CNCAVersionSetsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D75FF215BC07E006A3B84 /* CNCAVersionSetsModel.m */; };
+		271D7605215BC17C006A3B84 /* CNCAVSVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D7604215BC17C006A3B84 /* CNCAVSVersionModel.m */; };
+		271D7609215BC3F8006A3B84 /* CNCAVSVAppIconModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */; };
+		271D760E215BC5FC006A3B84 /* UIImageView+CNCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */; };
 		9206348B21578529001FE372 /* CNCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9206348A21578529001FE372 /* CNCWebView.m */; };
 		921279F72155222F000329FC /* CNCAsymptoticLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 921279F62155222F000329FC /* CNCAsymptoticLabel.m */; };
 		92266DBF2143633A00314435 /* CNCAccountManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92266DBE2143633900314435 /* CNCAccountManagerCell.m */; };
@@ -70,6 +74,14 @@
 
 /* Begin PBXFileReference section */
 		12290E2ADC527A29BD947089 /* Pods-Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		271D75FE215BC07E006A3B84 /* CNCAVersionSetsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCAVersionSetsModel.h; sourceTree = "<group>"; };
+		271D75FF215BC07E006A3B84 /* CNCAVersionSetsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCAVersionSetsModel.m; sourceTree = "<group>"; };
+		271D7603215BC17C006A3B84 /* CNCAVSVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCAVSVersionModel.h; sourceTree = "<group>"; };
+		271D7604215BC17C006A3B84 /* CNCAVSVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCAVSVersionModel.m; sourceTree = "<group>"; };
+		271D7607215BC3F8006A3B84 /* CNCAVSVAppIconModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCAVSVAppIconModel.h; sourceTree = "<group>"; };
+		271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCAVSVAppIconModel.m; sourceTree = "<group>"; };
+		271D760C215BC5FC006A3B84 /* UIImageView+CNCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CNCExtension.h"; sourceTree = "<group>"; };
+		271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CNCExtension.m"; sourceTree = "<group>"; };
 		353DFB8FF3A7B9CA3B02311B /* Pods-Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.release.xcconfig"; sourceTree = "<group>"; };
 		4D954A3E1A009AB9582CF3AB /* libPods-Connect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Connect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9206348921578529001FE372 /* CNCWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCWebView.h; sourceTree = "<group>"; };
@@ -218,6 +230,44 @@
 				4D954A3E1A009AB9582CF3AB /* libPods-Connect.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		271D7601215BC084006A3B84 /* VersionSets */ = {
+			isa = PBXGroup;
+			children = (
+				271D7602215BC143006A3B84 /* Version */,
+				271D75FE215BC07E006A3B84 /* CNCAVersionSetsModel.h */,
+				271D75FF215BC07E006A3B84 /* CNCAVersionSetsModel.m */,
+			);
+			path = VersionSets;
+			sourceTree = "<group>";
+		};
+		271D7602215BC143006A3B84 /* Version */ = {
+			isa = PBXGroup;
+			children = (
+				271D7606215BC3CA006A3B84 /* LargeAppIcon */,
+				271D7603215BC17C006A3B84 /* CNCAVSVersionModel.h */,
+				271D7604215BC17C006A3B84 /* CNCAVSVersionModel.m */,
+			);
+			path = Version;
+			sourceTree = "<group>";
+		};
+		271D7606215BC3CA006A3B84 /* LargeAppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				271D7607215BC3F8006A3B84 /* CNCAVSVAppIconModel.h */,
+				271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */,
+			);
+			path = LargeAppIcon;
+			sourceTree = "<group>";
+		};
+		271D760A215BC5BB006A3B84 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				271D760C215BC5FC006A3B84 /* UIImageView+CNCExtension.h */,
+				271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */,
+			);
+			path = UIImageView;
 			sourceTree = "<group>";
 		};
 		92063488215784F5001FE372 /* WKWebView */ = {
@@ -526,6 +576,7 @@
 		92D423FA2147717D00C9F915 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				271D7601215BC084006A3B84 /* VersionSets */,
 				9291005C2147C098007ADCC2 /* CNCApplicationModel.h */,
 				9291005D2147C098007ADCC2 /* CNCApplicationModel.m */,
 			);
@@ -702,6 +753,7 @@
 		92FE16E6213BAF1B00FB238A /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				271D760A215BC5BB006A3B84 /* UIImageView */,
 				92A12A782153730B00B88DFF /* UICollectionView */,
 				92D424052147817E00C9F915 /* UICollectionViewCell */,
 				92266DC42143773600314435 /* NSDate */,
@@ -1140,6 +1192,8 @@
 				92FE173D213BE22600FB238A /* CNCSettingCell.m in Sources */,
 				92D423E22146874A00C9F915 /* CNCQueryViewController.m in Sources */,
 				92D4240421477CC400C9F915 /* CNCApplicationCell.m in Sources */,
+				271D7609215BC3F8006A3B84 /* CNCAVSVAppIconModel.m in Sources */,
+				271D7605215BC17C006A3B84 /* CNCAVSVersionModel.m in Sources */,
 				92FE1741213BF8D200FB238A /* CNCSettingHeaderView.m in Sources */,
 				92FE1747213CC80000FB238A /* CNCAccountManagerViewController.m in Sources */,
 				92D424082147819D00C9F915 /* UICollectionViewCell+CNCExtension.m in Sources */,
@@ -1166,7 +1220,9 @@
 				92A12AB32154899B00B88DFF /* CNCQueryOptionsCell.m in Sources */,
 				92F95E38215511D600D8B03C /* CNCQCLoginViewController.m in Sources */,
 				92FE16EA213BAF5C00FB238A /* AppDelegate+CNCExtenison.m in Sources */,
+				271D760E215BC5FC006A3B84 /* UIImageView+CNCExtension.m in Sources */,
 				92A12AAF2154897C00B88DFF /* CNCQueryOptionView.m in Sources */,
+				271D7600215BC07E006A3B84 /* CNCAVersionSetsModel.m in Sources */,
 				92FE16FC213BB0C400FB238A /* CNCActivityViewController.m in Sources */,
 				92D423F621468A4800C9F915 /* CNCQueryCell.m in Sources */,
 				92FE1711213BBB7B00FB238A /* UITableView+CNCExtension.m in Sources */,
@@ -1300,7 +1356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T8952SPZY5;
+				DEVELOPMENT_TEAM = 424C7DNHBN;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Public/PCH/$(PROJECT_NAME).pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Connect/Public/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1321,7 +1377,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T8952SPZY5;
+				DEVELOPMENT_TEAM = 424C7DNHBN;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Public/PCH/$(PROJECT_NAME).pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Connect/Public/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

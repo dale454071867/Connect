@@ -13,8 +13,8 @@
 
 @implementation CNCNetwork
 
-/** 设置开发者中心登录请求头 */
-+ (void)cnc_setSiginRequestHeader {
+/** 设置开发者中心登录求头 */
++ (void)cnc_setAppleDevSiginHeader {
     [DWNetworking setHttpHeaderConfig:@{@"Accept":@"application/json, text/javascript, */*; q=0.01",
                                         @"Accept-Encoding":@"gzip, deflate, br",
                                         @"Accept-Language":@"zh-CN,zh;q=0.9",
@@ -22,20 +22,20 @@
                                         @"Content-Type":@"application/json",
                                         @"Host":@"idmsa.apple.com",
                                         @"Origin":@"https://idmsa.apple.com",
-                                        @"Referer":@"https://idmsa.apple.com/appleauth/auth/signin?widgetKey=e0b80c3bf78523bfe80974d320935bfa30add02e1bff88ec2166c6bd5a706c42&widgetDomain=https://itunesconnect.apple.com:443&font=sf",
+                                        @"Referer":@"https://idmsa.apple.com/appleauth/auth/signin?widgetKey=e0b80c3bf78523bfe80974d320935bfa30add02e1bff88ec2166c6bd5a706c42&widgetDomain=https://appstoreconnect.apple.com:443&font=sf",
                                         @"X-Apple-Widget-Key":@"e0b80c3bf78523bfe80974d320935bfa30add02e1bff88ec2166c6bd5a706c42",
                                         @"X-Requested-With":@"XMLHttpRequest",
                                         }];
 }
 
-/** 设置开发者中心查询请求头 */
-+ (void)cnc_setQueryReuqestHeader {
-    [DWNetworking setHttpHeaderConfig:@{@"Accept":@"application/json, text/javascript, */*; q=0.01",
+/** 设置查询应用状态请求头 */
++ (void)cnc_setQueryApplicationStatusHeaderHeader {
+    [DWNetworking setHttpHeaderConfig:@{@"Accept":@"application/json, text/plain, */*",
                                         @"Accept-Encoding":@"gzip, deflate, br",
                                         @"Accept-Language":@"zh-CN,zh;q=0.9",
                                         @"Connection":@"keep-alive",
-                                        @"Host":@"itunesconnect.apple.com",
-                                        @"Referer":@"https://itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app"
+                                        @"Referer":@"https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app",
+                                        @"x-csrf-itc":@"itc"
                                         }];
 }
 

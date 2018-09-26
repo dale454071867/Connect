@@ -11,6 +11,7 @@
 #import "UIImage+QMUI.h"
 #import "NSString+QMUI.h"
 #import "UIViewController+QMUI.h"
+#import "QMUIKit.h"
 #import <objc/runtime.h>
 
 // 在 iOS 8 - 11 上实际测量得到
@@ -70,7 +71,25 @@ static BOOL QMUI_hasAppliedInitialTemplate;
         free(classes);
     }
     
+    if (IS_DEBUG && self.sendAnalyticsToQMUITeam) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:[NSOperationQueue new] usingBlock:^(NSNotification * _Nonnull note) {
+            [self sendAnalytics];
+        }];
+    }
+    
     QMUI_hasAppliedInitialTemplate = YES;
+}
+
+- (void)sendAnalytics {
+    NSString *identifier = [NSBundle mainBundle].bundleIdentifier.qmui_stringByEncodingUserInputQuery;
+    NSString *displayName = ((NSString *)([NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: [NSBundle mainBundle].infoDictionary[@"CFBundleName"])).qmui_stringByEncodingUserInputQuery;
+    NSString *QMUIVersion = QMUI_VERSION.qmui_stringByEncodingUserInputQuery;// 如果不以 framework 方式引入 QMUI 的话，是无法通过 CFBundleShortVersionString 获取到 QMUI 所在的 bundle 的版本号的，所以这里改为用脚本生成的变量来获取
+    NSString *appInfo = [NSString stringWithFormat:@"appId=%@&appName=%@&version=%@&platform=iOS", identifier, displayName, QMUIVersion];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://qmuiteam.com/analytics/usageReport"]];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [appInfo dataUsingEncoding:NSUTF8StringEncoding];
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:request] resume];
 }
 
 #pragma mark - Initialize default values
@@ -246,7 +265,7 @@ static BOOL QMUI_hasAppliedInitialTemplate;
     
     #pragma mark - Others
     
-    self.supportedOrientationMask = UIInterfaceOrientationMaskPortrait;
+    self.supportedOrientationMask = UIInterfaceOrientationMaskAll;
     self.automaticallyRotateDeviceOrientation = NO;
     self.statusbarStyleLightInitially = NO;
     self.needsBackBarButtonItemTitle = NO;
@@ -254,6 +273,7 @@ static BOOL QMUI_hasAppliedInitialTemplate;
     self.preventConcurrentNavigationControllerTransitions = YES;
     self.navigationBarHiddenInitially = NO;
     self.shouldFixTabBarTransitionBugInIPhoneX = NO;
+    self.sendAnalyticsToQMUITeam = YES;
 }
 
 - (void)setNavBarButtonFont:(UIFont *)navBarButtonFont {

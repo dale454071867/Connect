@@ -12,10 +12,10 @@
 @interface CNCNetwork : NSObject
 
 /** 设置开发者中心登录请求头 */
-+ (void)cnc_setSiginRequestHeader;
++ (void)cnc_setAppleDevSiginHeader;
 
 /** 设置开发者中心查询请求头 */
-+ (void)cnc_setQueryReuqestHeader;
++ (void)cnc_setQueryApplicationStatusHeaderHeader;
 
 /**
  POST
