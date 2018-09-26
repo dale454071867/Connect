@@ -82,9 +82,9 @@ static NSString *const kIdentifier = @"cell";
     cell.appName.text = model.name;
     cell.lastTime.text = model.lastModifiedDate;
     cell.appVerison1Activity.backgroundColor = UIColorGreen;
-    cell.appVersion1.text = @"1.1";
+    cell.appVersion1.text = @"1";
     cell.appVerison2Activity.backgroundColor = UIColorRed;
-    cell.appVersion2.text = @"1.0.2";
+    cell.appVersion2.text = @"2";
     cell.delegate = self;
     return cell;
 }
