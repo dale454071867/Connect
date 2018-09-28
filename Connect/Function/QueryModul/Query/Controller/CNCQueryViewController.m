@@ -80,6 +80,7 @@
     [tableView qmui_clearsSelection];
     CNCApplicationViewController *application = [[CNCApplicationViewController alloc] init];
     application.accountModel = CNCSQL.accountModels[indexPath.row];
+    application.index = indexPath.row;
     [self.navigationController pushViewController:application animated:YES];
 }
 

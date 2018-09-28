@@ -15,4 +15,7 @@
 /** 账号模型 */
 @property(nonatomic, strong) CNCAccountModel *accountModel;
 
+/** 当前账号在数据库中的位置 */
+@property(nonatomic, assign) NSInteger index;
+
 @end

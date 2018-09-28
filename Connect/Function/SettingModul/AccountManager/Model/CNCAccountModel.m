@@ -20,6 +20,9 @@
 /** 开发者密码 */
 @property(nonatomic, copy, readwrite) NSString *developer_password;
 
+/** cookie */
+@property(nonatomic, copy, readwrite) NSString *cookies;
+
 /** 备注 */
 @property(nonatomic, copy, readwrite) NSString *mark;
 

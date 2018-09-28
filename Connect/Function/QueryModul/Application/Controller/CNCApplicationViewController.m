@@ -52,7 +52,7 @@ static NSString *const kIdentifier = @"cell";
 - (void)setNetwork {
     [self.toastView showLoading];
     __weak __typeof(self)weakSelf = self;
-    [self.model cnc_getApplicationStatusWithAccountName:self.accountModel.email password:self.accountModel.developer_password];
+    [self.model cnc_getApplicationStatusWithAccountModel:self.accountModel index:self.index];
     self.model.cnc_queryApplicationStatusCallBack = ^{
         [weakSelf.toastView hideAnimated:YES];
         [weakSelf.applicationView reloadData];

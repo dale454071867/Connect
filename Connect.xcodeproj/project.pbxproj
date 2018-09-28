@@ -11,6 +11,7 @@
 		271D7605215BC17C006A3B84 /* CNCAVSVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D7604215BC17C006A3B84 /* CNCAVSVersionModel.m */; };
 		271D7609215BC3F8006A3B84 /* CNCAVSVAppIconModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */; };
 		271D760E215BC5FC006A3B84 /* UIImageView+CNCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */; };
+		27B276D3215CECCB00C1975F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B276D2215CECCA00C1975F /* libiconv.tbd */; };
 		9206348B21578529001FE372 /* CNCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9206348A21578529001FE372 /* CNCWebView.m */; };
 		921279F72155222F000329FC /* CNCAsymptoticLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 921279F62155222F000329FC /* CNCAsymptoticLabel.m */; };
 		92266DBF2143633A00314435 /* CNCAccountManagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92266DBE2143633900314435 /* CNCAccountManagerCell.m */; };
@@ -82,6 +83,7 @@
 		271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCAVSVAppIconModel.m; sourceTree = "<group>"; };
 		271D760C215BC5FC006A3B84 /* UIImageView+CNCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CNCExtension.h"; sourceTree = "<group>"; };
 		271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CNCExtension.m"; sourceTree = "<group>"; };
+		27B276D2215CECCA00C1975F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		353DFB8FF3A7B9CA3B02311B /* Pods-Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.release.xcconfig"; sourceTree = "<group>"; };
 		4D954A3E1A009AB9582CF3AB /* libPods-Connect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Connect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9206348921578529001FE372 /* CNCWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCWebView.h; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B276D3215CECCB00C1975F /* libiconv.tbd in Frameworks */,
 				D6626005EF57B21A8FADC31B /* libPods-Connect.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +230,7 @@
 		0C2F073317BA41859E508872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27B276D2215CECCA00C1975F /* libiconv.tbd */,
 				4D954A3E1A009AB9582CF3AB /* libPods-Connect.a */,
 			);
 			name = Frameworks;

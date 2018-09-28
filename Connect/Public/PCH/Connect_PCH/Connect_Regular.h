@@ -13,4 +13,7 @@
 /** 邮箱验证,自己写的第一个正则,记录一下😁😁😁 */
 static NSString *const kEMailRegular = @"^\\w+@([A-Za-z0-9]{2,}\\.)+[A-Za-z]{2,}$";
 
+/** cookie分割规则 */
+static NSString *const kCookiesSegmentationRegular = @"CoderDwang_Connect_iOS_Segmentation_Regular";
+
 #endif /* Connect_Regular_h */

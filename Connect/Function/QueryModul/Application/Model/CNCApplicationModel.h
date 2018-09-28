@@ -9,6 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CNCAVersionSetsModel.h"
+@class CNCAccountModel;
 
 @interface CNCApplicationModel : NSObject
 
@@ -48,9 +49,9 @@
 /**
  请求登录
 
- @param accountName 账号
- @param password 密码
+ @param model 账号模型
+ @param index 在数据库中的位置
  */
-- (void)cnc_getApplicationStatusWithAccountName:(NSString *)accountName password:(NSString *)password;
+- (void)cnc_getApplicationStatusWithAccountModel:(CNCAccountModel *)model index:(NSInteger)index;
 
 @end

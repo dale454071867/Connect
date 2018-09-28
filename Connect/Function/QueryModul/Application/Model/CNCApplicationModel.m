@@ -8,8 +8,35 @@
 //
 
 #import "CNCApplicationModel.h"
+#import "CNCAccountModel.h"
 #import "CNCNotification.h"
+#import "CNCSQLManager.h"
 #import <YYModel.h>
+
+@interface CNCCookieModel : NSObject
+
+/** 版本 */
+@property(nonatomic, copy) NSString *version;
+
+/** 名称 */
+@property(nonatomic, copy) NSString *name;
+
+/** 数据 */
+@property(nonatomic, copy) NSString *value;
+
+/** 日期 */
+@property(nonatomic, copy) NSString *expiresDate;
+
+/** domain */
+@property(nonatomic, copy) NSString *domain;
+
+/** 路径 */
+@property(nonatomic, copy) NSString *path;
+
+/** 是否安全 */
+@property(nonatomic, copy) NSString *isSecure;
+
+@end
 
 @interface CNCApplicationModel ()
 
@@ -47,19 +74,47 @@
 
 @implementation CNCApplicationModel
 
-- (void)cnc_getApplicationStatusWithAccountName:(NSString *)accountName password:(NSString *)password {
+- (void)cnc_getApplicationStatusWithAccountModel:(CNCAccountModel *)model index:(NSInteger)index{
     __weak __typeof(self)weakSelf = self;
+    if (model.cookies.isNotBlank && !ISEqualToString(model.cookies, @"cookies")) {
+        NSArray<NSString *> *cookies = [model.cookies componentsSeparatedByString:kCookiesSegmentationRegular];
+        NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        [cookies enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            CNCCookieModel *cookieModel = [CNCCookieModel yy_modelWithJSON:[weakSelf cnc_cookieString:obj]];
+            NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                       cookieModel.name, NSHTTPCookieName,
+                                                                       cookieModel.value, NSHTTPCookieValue,
+                                                                       cookieModel.version,NSHTTPCookieVersion,
+                                                                       cookieModel.domain,NSHTTPCookieDomain,
+                                                                       cookieModel.path,NSHTTPCookiePath,
+                                                                       cookieModel.isSecure,NSHTTPCookieSecure,
+                                                                       cookieModel.expiresDate,NSHTTPCookieExpires,
+                                                                       nil]];
+        [cookieStorage setCookie:cookie];
+        }];
+        [self cnc_getAppleApplicationStatus];
+    }else {
     [CNCNetwork cnc_setAppleDevSiginHeader];
-    [CNCNetwork postUrl:appleDevSiginUrlHost params:@{@"accountName":accountName,
-                                                      @"password":password,
+    [CNCNetwork postUrl:appleDevSiginUrlHost params:@{@"accountName":model.email,
+                                                      @"password":model.developer_password,
                                                       @"rememberMe":@"true"}
                callBack:^(id success) {
                    if ([success[@"authType"] isEqualToString:@"sa"]) {
+                       CNCAccountModel *accountModel = [[CNCAccountModel alloc] init];
+                       [accountModel setValue:model.email forKey:@"email"];
+                       [accountModel setValue:model.developer_password forKey:@"developer_password"];
+                       [accountModel setValue:model.email_password forKey:@"email_password"];
+                       [accountModel setValue:model.mark forKey:@"mark"];
+                       [accountModel setValue:model.lastTime forKey:@"lastTime"];
+                       [accountModel setValue:[[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies] componentsJoinedByString:kCookiesSegmentationRegular] forKey:@"cookies"];
+                       [CNCSQL cnc_editForAccountSQLTableWithModel:accountModel];
+                       [CNCNotification cnc_postNotificationName:kACCOUNTDATACHANGE object:@(index)];
                        [weakSelf cnc_getAppleApplicationStatus];
                    }else {
                        [CNCNotification cnc_postNotificationName:kREQUESTERROR object:[NSString stringWithFormat:@"登录失败\n%@", success]];
                    }
                }];
+    }
 }
 
 - (void)cnc_getAppleApplicationStatus {
@@ -100,11 +155,29 @@
     return @"刚刚";
 }
 
+- (NSDictionary *)cnc_cookieString:(NSString *)cookieString {
+    NSMutableDictionary *cookies = [NSMutableDictionary dictionary];
+    cookieString = [cookieString stringByReplacingOccurrencesOfString:@"<NSHTTPCookie" withString:@""];
+    NSMutableArray <NSString *>*coks = [NSMutableArray arrayWithArray:[cookieString componentsSeparatedByString:@"\n"]];
+    [coks removeLastObject];
+    [coks enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSArray <NSString *>*kvs = [obj componentsSeparatedByString:@":"];
+        if (kvs.count > 1) {
+            [cookies setObject:kvs[1] forKey:[kvs[0] qmui_trimAllWhiteSpace]];
+        }
+    }];
+    return cookies;
+}
+
 - (NSArray<CNCApplicationModel *> *)models {
     if (!_models) {
         _models = [NSArray array];
     }
     return _models;
 }
+
+@end
+
+@implementation CNCCookieModel
 
 @end

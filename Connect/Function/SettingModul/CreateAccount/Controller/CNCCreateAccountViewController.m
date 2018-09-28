@@ -83,6 +83,7 @@
     }];
     if (result) {
         [model setValue:[NSDate cnc_currentDate] forKey:@"lastTime"];
+        [model setValue:@"cookies" forKey:@"cookies"];
         if (self.accountModel) {
             [CNCSQL cnc_editForAccountSQLTableWithModel:model];
         }else{
