@@ -9,7 +9,6 @@
 
 #import <UIKit/UIKit.h>
 @class CNCApplicationCell;
-@class CNCAnimationLabel;
 
 @protocol CNCApplicationCellDelegate <NSObject>
 @optional
@@ -36,7 +35,7 @@
 @property(nonatomic, strong) UIImageView *appIcon;
 
 /** 应用名称 */
-@property(nonatomic, strong) CNCAnimationLabel *appName;
+@property(nonatomic, strong) QMUILabel *appName;
 
 /** 最后操作时间 */
 @property(nonatomic, strong) QMUILabel *lastTime;

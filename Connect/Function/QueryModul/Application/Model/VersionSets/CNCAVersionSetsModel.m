@@ -8,6 +8,7 @@
 //
 
 #import "CNCAVersionSetsModel.h"
+#import <YYModel.h>
 
 @interface CNCAVersionSetsModel ()
 
@@ -20,6 +21,9 @@
 /** 在销售的版本 */
 @property(nonatomic, strong, readwrite) CNCAVSVersionModel *deliverableVersion;
 
+@property(nonatomic, copy, readwrite) NSString *type;
+
+@property(nonatomic, assign, readwrite) BOOL everBeenOnSale;
 
 @end
 

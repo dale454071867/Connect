@@ -26,8 +26,48 @@
 /** 状态分组 */
 @property(nonatomic, copy, readwrite) NSString *stateGroup;
 
+/** 状态颜色 */
+@property(nonatomic, strong, readwrite) UIColor *stateColor;
+
 @end
 
 @implementation CNCAVSVersionModel
+
+- (NSString *)stateStr {
+    if (ISEqualToString(_state, @"inReview")) {
+        return @"正在审核";
+    }else if (ISEqualToString(_state, @"waitingForReview")) {
+        return @"等待审核";
+    }else if (ISEqualToString(_state, @"prepareForUpload")) {
+        return @"准备提交";
+    }else if (ISEqualToString(_state, @"devRejected")) {
+        return @"被开发人员拒绝";
+    }else if (ISEqualToString(_state, @"rejected")) {
+        return @"被拒绝";
+    }else if (ISEqualToString(_state, @"metadataRejected")) {
+        return @"元数据被拒绝";
+    }else if (ISEqualToString(_state, @"removedFromSale")) {
+        return @"已下架";
+    }else if (ISEqualToString(_state, @"readyForSale")) {
+        return @"可供销售";
+    }
+    return _state;
+}
+
+- (UIColor *)stateColor {
+    if (ISEqualToString(_state, @"inReview") ||
+        ISEqualToString(_state, @"waitingForReview") ||
+        ISEqualToString(_state, @"prepareForUpload")) {
+        return UIColorMake(255, 207, 71);
+    }else if (ISEqualToString(_state, @"devRejected") ||
+              ISEqualToString(_state, @"rejected") ||
+              ISEqualToString(_state, @"metadataRejected") ||
+              ISEqualToString(_state, @"removedFromSale")) {
+        return UIColorRed;
+    }else if (ISEqualToString(_state, @"readyForSale")) {
+        return UIColorMake(159, 214, 97);
+    }
+    return [UIColor qmui_randomColor];
+}
 
 @end

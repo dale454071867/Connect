@@ -81,10 +81,19 @@ static NSString *const kIdentifier = @"cell";
     cell.appIcon.activity = model.iconUrl;
     cell.appName.text = model.name;
     cell.lastTime.text = model.lastModifiedDate;
-    cell.appVerison1Activity.backgroundColor = UIColorGreen;
-    cell.appVersion1.text = @"1";
-    cell.appVerison2Activity.backgroundColor = UIColorRed;
-    cell.appVersion2.text = @"2";
+    CNCAVersionSetsModel *setsModel = model.versionSets[0];
+    if (setsModel.deliverableVersion.state.length) {
+        cell.appVerison1Activity.backgroundColor = setsModel.deliverableVersion.stateColor;
+        cell.appVersion1.text = setsModel.deliverableVersion.version;
+        if (setsModel.inFlightVersion.state.length) {
+            NSLog(@"%@", setsModel.inFlightVersion.state);
+            cell.appVerison2Activity.backgroundColor = setsModel.inFlightVersion.stateColor;
+            cell.appVersion2.text = setsModel.inFlightVersion.version;
+        }
+    }else {
+        cell.appVerison1Activity.backgroundColor = setsModel.inFlightVersion.stateColor;
+        cell.appVersion1.text = setsModel.inFlightVersion.version;
+    }
     cell.delegate = self;
     return cell;
 }

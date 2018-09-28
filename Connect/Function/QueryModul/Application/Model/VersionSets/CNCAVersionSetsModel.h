@@ -23,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** 在销售的版本 */
 @property(nonatomic, strong, readonly) CNCAVSVersionModel *deliverableVersion;
 
+/** 类型 */
+@property(nonatomic, copy, readonly) NSString *type;
+
+/** 曾经是否销售过 */
+@property(nonatomic, assign, readonly) BOOL everBeenOnSale;
+
 @end
 
 NS_ASSUME_NONNULL_END

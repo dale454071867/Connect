@@ -50,13 +50,12 @@
         make.size.equalTo(self.transfromView.mas_height).offset(-10);
     }];
     
-    self.appName = [[CNCAnimationLabel alloc] init];
-    self.appName.fontSize = 16;
-    self.appName.fill = YES;
+    self.appName = [[QMUILabel alloc] init];
+    self.appName.font = UIFontMake(16);
     [self.transfromView addSubview:self.appName];
     [self.appName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.appIcon.mas_top).offset(20);
-        make.left.equalTo(self.appIcon.mas_right).offset(84+15+10);
+        make.top.equalTo(self.appIcon.mas_top).offset(2.5);
+        make.left.equalTo(self.appIcon.mas_right).offset(10);
     }];
     
     self.lastTime = [[QMUILabel alloc] init];
@@ -65,7 +64,7 @@
     [self.transfromView addSubview:self.lastTime];
     [self.lastTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.appIcon.mas_centerY).offset(2.5);
-        make.left.equalTo(self.appIcon.mas_right).offset(10);
+        make.left.equalTo(self.appName.mas_left);
     }];
     
     self.appVerison1Activity = [[UIView alloc] init];

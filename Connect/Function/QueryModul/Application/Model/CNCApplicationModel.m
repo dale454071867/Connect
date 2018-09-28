@@ -169,6 +169,10 @@
     return cookies;
 }
 
+- (NSArray<CNCAVersionSetsModel *> *)versionSets {
+    return [NSArray yy_modelArrayWithClass:[CNCAVersionSetsModel class] json:_versionSets];
+}
+
 - (NSArray<CNCApplicationModel *> *)models {
     if (!_models) {
         _models = [NSArray array];
