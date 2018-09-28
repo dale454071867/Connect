@@ -34,8 +34,14 @@
 /** 预订截止日期 */
 @property(nonatomic, copy, readonly) NSString *preOrderEndDate;
 
-/** 最后操作时间 */
+/** 最后操作时间戳 */
 @property(nonatomic, copy, readonly) NSString *lastModifiedDate;
+
+/** 最后修改时间格式化时间 */
+@property(nonatomic, copy, readonly) NSString *lastModifiedFormatDate;
+
+/** 最后修改时间至今时间差 */
+@property(nonatomic, copy, readonly) NSString *lastModifiedFifferenceDate;
 
 /** 问题数量 */
 @property(nonatomic, copy, readonly) NSString *issuesCount;

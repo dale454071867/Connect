@@ -38,19 +38,25 @@
 @property(nonatomic, strong) QMUILabel *appName;
 
 /** 最后操作时间 */
-@property(nonatomic, strong) QMUILabel *lastTime;
+@property(nonatomic, strong) QMUIButton *lastTime;
 
-/** 应用版本 */
+/** 应用版本1 */
 @property(nonatomic, strong) QMUILabel *appVersion1;
 
-/** 应用版本状态指示器 */
+/** 应用版本状态指示器1 */
 @property(nonatomic, strong) UIView *appVerison1Activity;
 
-/** 应用版本 */
+/** 应用版本1按钮 */
+@property(nonatomic, strong) QMUIButton *apv1;
+
+/** 应用版本2 */
 @property(nonatomic, strong) QMUILabel *appVersion2;
 
-/** 应用版本状态指示器 */
+/** 应用版本状态指示器2 */
 @property(nonatomic, strong) UIView *appVerison2Activity;
+
+/** 应用版本2按钮 */
+@property(nonatomic, strong) QMUIButton *apv2;
 
 /** 忽略/隐藏此App */
 @property(nonatomic, strong) QMUIButton *ignore;

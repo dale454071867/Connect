@@ -51,16 +51,16 @@
     }];
     
     self.appName = [[QMUILabel alloc] init];
-    self.appName.font = UIFontMake(16);
+    self.appName.font = UIFontMake(18);
     [self.transfromView addSubview:self.appName];
     [self.appName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.appIcon.mas_top).offset(2.5);
         make.left.equalTo(self.appIcon.mas_right).offset(10);
     }];
     
-    self.lastTime = [[QMUILabel alloc] init];
-    self.lastTime.font = UIFontMake(14);
-    self.lastTime.textColor = UIColorGrayLighten;
+    self.lastTime = [[QMUIButton alloc] init];
+    self.lastTime.titleLabel.font = UIFontMake(14);
+    [self.lastTime setTitleColor:UIColorGrayLighten forState:UIControlStateNormal];
     [self.transfromView addSubview:self.lastTime];
     [self.lastTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.appIcon.mas_centerY).offset(2.5);
@@ -86,6 +86,13 @@
         make.centerY.equalTo(self.appVerison1Activity);
     }];
     
+    self.apv1 = [[QMUIButton alloc] init];
+    [self.transfromView addSubview:self.apv1];
+    [self.apv1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.equalTo(self.appVerison1Activity);
+        make.right.equalTo(self.appVersion1.mas_right);
+    }];
+    
     self.appVerison2Activity = [[UIView alloc] init];
     [self.transfromView addSubview:self.appVerison2Activity];
     [self.appVerison2Activity mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,6 +109,12 @@
     [self.appVersion2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.appVerison2Activity.mas_right).offset(5);
         make.centerY.equalTo(self.appVerison2Activity);
+    }];
+    self.apv2 = [[QMUIButton alloc] init];
+    [self.transfromView addSubview:self.apv2];
+    [self.apv2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.equalTo(self.appVerison2Activity);
+        make.right.equalTo(self.appVersion2.mas_right);
     }];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesterDidPan:)];

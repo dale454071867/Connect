@@ -64,6 +64,12 @@
 /** 最后操作时间 */
 @property(nonatomic, copy, readwrite) NSString *lastModifiedDate;
 
+/** 最后修改时间格式化时间 */
+@property(nonatomic, copy, readwrite) NSString *lastModifiedFormatDate;
+
+/** 最后修改时间至今时间差 */
+@property(nonatomic, copy, readwrite) NSString *lastModifiedFifferenceDate;
+
 /** 问题数量 */
 @property(nonatomic, copy, readwrite) NSString *issuesCount;
 
@@ -132,7 +138,15 @@
     }];
 }
 
-- (NSString *)lastModifiedDate {
+- (NSString *)lastModifiedFormatDate {
+    NSTimeInterval interval = [_lastModifiedDate doubleValue]/1000.0;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy/MM/dd HH:mm:ss";
+    return [formatter stringFromDate:date];
+}
+
+- (NSString *)lastModifiedFifferenceDate {
     NSTimeInterval interval = [_lastModifiedDate doubleValue]/1000.0;
     NSDate *nowDate = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

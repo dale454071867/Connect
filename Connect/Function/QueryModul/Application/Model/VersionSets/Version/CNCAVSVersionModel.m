@@ -29,6 +29,9 @@
 /** 状态颜色 */
 @property(nonatomic, strong, readwrite) UIColor *stateColor;
 
+/** 状态中文 */
+@property(nonatomic, copy, readwrite) NSString *stateStr;
+
 @end
 
 @implementation CNCAVSVersionModel
@@ -43,7 +46,7 @@
     }else if (ISEqualToString(_state, @"devRejected")) {
         return @"被开发人员拒绝";
     }else if (ISEqualToString(_state, @"rejected")) {
-        return @"被拒绝";
+        return @"二进制文件被拒绝";
     }else if (ISEqualToString(_state, @"metadataRejected")) {
         return @"元数据被拒绝";
     }else if (ISEqualToString(_state, @"removedFromSale")) {

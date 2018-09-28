@@ -24,6 +24,8 @@
 
 @property(nonatomic, strong) CNCApplicationModel *model;
 
+@property(nonatomic, strong) QMUIPopupContainerView *popupContainerView;
+
 @end
 
 static NSString *const kIdentifier = @"cell";
@@ -80,19 +82,26 @@ static NSString *const kIdentifier = @"cell";
     CNCApplicationModel *model = self.model.models[indexPath.row];
     cell.appIcon.activity = model.iconUrl;
     cell.appName.text = model.name;
-    cell.lastTime.text = model.lastModifiedDate;
+    [cell.lastTime setTitle:model.lastModifiedFifferenceDate forState:UIControlStateNormal];
+    cell.lastTime.tag = indexPath.row;
+    [cell.lastTime addTarget:self action:@selector(cnc_lastTimeDidClick:) forControlEvents:UIControlEventTouchUpInside];
     CNCAVersionSetsModel *setsModel = model.versionSets[0];
     if (setsModel.deliverableVersion.state.length) {
         cell.appVerison1Activity.backgroundColor = setsModel.deliverableVersion.stateColor;
         cell.appVersion1.text = setsModel.deliverableVersion.version;
         if (setsModel.inFlightVersion.state.length) {
-            NSLog(@"%@", setsModel.inFlightVersion.state);
             cell.appVerison2Activity.backgroundColor = setsModel.inFlightVersion.stateColor;
             cell.appVersion2.text = setsModel.inFlightVersion.version;
         }
     }else {
         cell.appVerison1Activity.backgroundColor = setsModel.inFlightVersion.stateColor;
         cell.appVersion1.text = setsModel.inFlightVersion.version;
+    }
+    cell.apv1.tag = indexPath.row;
+    cell.apv2.tag = indexPath.row;
+    [cell.apv1 addTarget:self action:@selector(cnc_apv1DidClick:) forControlEvents:UIControlEventTouchUpInside];
+    if (cell.appVersion2.text.isNotBlank) {
+        [cell.apv2 addTarget:self action:@selector(cnc_apv2DidClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.delegate = self;
     return cell;
@@ -114,6 +123,37 @@ static NSString *const kIdentifier = @"cell";
     }
 }
 
+- (void)cnc_lastTimeDidClick:(QMUIButton *)sender {
+    CNCApplicationModel *model = self.model.models[sender.tag];
+    self.popupContainerView.textLabel.text = model.lastModifiedFormatDate;
+    [self.popupContainerView layoutWithTargetView:sender];
+    [self.popupContainerView showWithAnimated:YES];
+}
+
+- (void)cnc_apv1DidClick:(QMUIButton *)sender {
+    CNCApplicationModel *model = self.model.models[sender.tag];
+    if (model.versionSets[0].deliverableVersion.state.length) {
+        self.popupContainerView.textLabel.text = [NSString stringWithFormat:@"版本号:%@\n问题数:%@\n当前状态:%@",
+                                                  model.versionSets[0].deliverableVersion.version,
+                                                  model.issuesCount,
+                                                  model.versionSets[0].deliverableVersion.stateStr];
+        [self.popupContainerView layoutWithTargetView:sender];
+        [self.popupContainerView showWithAnimated:YES];
+    }else{
+        [self cnc_apv2DidClick:sender];
+    }
+}
+
+- (void)cnc_apv2DidClick:(QMUIButton *)sender {
+    CNCApplicationModel *model = self.model.models[sender.tag];
+    self.popupContainerView.textLabel.text = [NSString stringWithFormat:@"版本号:%@\n问题数:%@\n当前状态:%@",
+                                              model.versionSets[0].inFlightVersion.version,
+                                              model.issuesCount,
+                                              model.versionSets[0].inFlightVersion.stateStr];
+    [self.popupContainerView layoutWithTargetView:sender];
+    [self.popupContainerView showWithAnimated:YES];
+}
+
 - (void)cnc_applicationDidSelectRemoveCell:(CNCApplicationCell *)cell {
     [cell cnc_hiddenRemoveCellOption];
     QMUIAlertController *alert = [QMUIAlertController alertControllerWithTitle:@"您是否要隐藏此App" message:@"当您选择隐藏后,下次查询时此App将不会出现在您的App列表中,但是您可以通过设置中的选项来使被隐藏的App再次显示." preferredStyle:QMUIAlertControllerStyleAlert];
@@ -127,6 +167,14 @@ static NSString *const kIdentifier = @"cell";
     }]];
     [alert addCancelAction];
     [alert showWithAnimated:YES];
+}
+
+- (QMUIPopupContainerView *)popupContainerView {
+    if (!_popupContainerView) {
+        _popupContainerView = [[QMUIPopupContainerView alloc] init];
+        _popupContainerView.automaticallyHidesWhenUserTap = YES;
+    }
+    return _popupContainerView;
 }
 
 - (CNCApplicationView *)applicationView {

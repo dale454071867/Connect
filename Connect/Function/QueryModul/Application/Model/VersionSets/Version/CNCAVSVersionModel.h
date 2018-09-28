@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 状态颜色 */
 @property(nonatomic, strong, readonly) UIColor *stateColor;
 
+/** 状态中文 */
+@property(nonatomic, copy, readonly) NSString *stateStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

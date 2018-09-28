@@ -63,6 +63,7 @@
 
 /** 请求失败 */
 + (void)cnc_requestError:(NSError *)error {
+    NSLog(@"%@", error);
     [CNCNotification cnc_postNotificationName:kREQUESTERROR object:error.description];
 }
 
