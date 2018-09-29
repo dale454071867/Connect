@@ -16,4 +16,10 @@ static NSString *const appleDevSiginUrlHost = @"https://idmsa.apple.com/appleaut
 /** 查询应用状态 */
 static NSString *const appleApplicationStatusUrlHost = @"https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/apps/manageyourapps/summary/v2";
 
+/** 解决方案中心 */
+static NSString const *appleiTunesConnectResolutionCenter = @"https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/apps/######/platforms/ios/resolutionCenter";
+
+/** 回复审核团队 */
+static NSString *const apple = @"https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/apps/######/platforms/ios/resolutionCenter";
+
 #endif /* Connect_UrlHost_h */

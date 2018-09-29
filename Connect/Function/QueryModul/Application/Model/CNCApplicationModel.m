@@ -76,11 +76,20 @@
 /** 版本状态 */
 @property(nonatomic, strong, readwrite) NSArray<CNCAVersionSetsModel *> *versionSets;
 
+/** 暂存账号模型 */
+@property(nonatomic, strong) CNCAccountModel *accountModel;
+
+/** 暂存index */
+@property(nonatomic, assign) NSInteger index;
+
 @end
 
 @implementation CNCApplicationModel
 
-- (void)cnc_getApplicationStatusWithAccountModel:(CNCAccountModel *)model index:(NSInteger)index{
+- (void)cnc_getApplicationStatusWithAccountModel:(CNCAccountModel *)model index:(NSInteger)index {
+    self.accountModel = model;
+    self.index = index;
+    [CNCNotification cnc_addObserver:self selector:@selector(cnc_reloadNetwork) name:kREQUESTQUERYAPPLICATIONERRORCALLBACK];
     __weak __typeof(self)weakSelf = self;
     if (model.cookies.isNotBlank && !ISEqualToString(model.cookies, @"cookies")) {
         NSArray<NSString *> *cookies = [model.cookies componentsSeparatedByString:kCookiesSegmentationRegular];
@@ -105,7 +114,7 @@
                                                       @"password":model.developer_password,
                                                       @"rememberMe":@"true"}
                callBack:^(id success) {
-                   if ([success[@"authType"] isEqualToString:@"sa"]) {
+                   if (ISEqualToString(success[@"authType"], @"sa")) {
                        CNCAccountModel *accountModel = [[CNCAccountModel alloc] init];
                        [accountModel setValue:model.email forKey:@"email"];
                        [accountModel setValue:model.developer_password forKey:@"developer_password"];
@@ -127,7 +136,7 @@
     __weak __typeof(self)weakSelf = self;
     [CNCNetwork cnc_setQueryApplicationStatusHeaderHeader];
     [CNCNetwork getUrl:appleApplicationStatusUrlHost callBack:^(id success) {
-        if ([success[@"statusCode"] isEqualToString:@"SUCCESS"]) {
+        if (ISEqualToString(success[@"statusCode"], @"SUCCESS")) {
             weakSelf.models = [NSArray yy_modelArrayWithClass:[CNCApplicationModel class] json:success[@"data"][@"summaries"]];
             if (weakSelf.cnc_queryApplicationStatusCallBack) {
                 weakSelf.cnc_queryApplicationStatusCallBack();
@@ -136,6 +145,11 @@
             [CNCNotification cnc_postNotificationName:kREQUESTERROR object:[NSString stringWithFormat:@"查询失败\n%@", success]];
         }
     }];
+}
+
+- (void)cnc_reloadNetwork {
+    [self.accountModel setValue:@"cookies" forKey:@"cookies"];
+    [self cnc_getApplicationStatusWithAccountModel:self.accountModel index:self.index];
 }
 
 - (NSString *)lastModifiedFormatDate {
@@ -192,6 +206,11 @@
         _models = [NSArray array];
     }
     return _models;
+}
+
+- (void)dealloc
+{
+    [CNCNotification cnc_removeObserver:self name:kREQUESTQUERYAPPLICATIONERRORCALLBACK];
 }
 
 @end

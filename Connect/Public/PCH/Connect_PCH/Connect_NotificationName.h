@@ -16,4 +16,7 @@ static NSString * const kACCOUNTDATACHANGE = @"cnc_accountDataChange";
 /** 请求失败 */
 static NSString * const kREQUESTERROR = @"cnc_requestError";
 
+/** 请求查询失败 */
+static NSString *const kREQUESTQUERYAPPLICATIONERRORCALLBACK = @"cnc_requestQueryApplicationErrorCallBack";
+
 #endif /* Connect_NotificationName_h */

@@ -63,8 +63,13 @@
 
 /** 请求失败 */
 + (void)cnc_requestError:(NSError *)error {
-    NSLog(@"%@", error);
-    [CNCNotification cnc_postNotificationName:kREQUESTERROR object:error.description];
+    //当错误码为3840,且错误的请求地址为查询状态地址时则认为cookie失效,需要重新请求登录接口
+    if (error.code == 3840 &&
+        [error.userInfo.description containsString:appleApplicationStatusUrlHost]) {
+        [CNCNotification cnc_postNotificationName:kREQUESTQUERYAPPLICATIONERRORCALLBACK];
+    }else {
+        [CNCNotification cnc_postNotificationName:kREQUESTERROR object:error.description];
+    }
 }
 
 @end

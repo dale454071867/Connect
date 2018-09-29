@@ -30,7 +30,7 @@
 #import "Connect_NotificationName.h"//通知名
 #import "Connect_Enum.h"//枚举
 #import "Connect_Bool.h"//字符比较
-#import "Connect_UrlHost.h"//请求地址
 #import "Connect_Regular.h"//正则
+#import "Connect_UrlHost.h"//请求地址
 
 #endif /* Connect_Header_h */
