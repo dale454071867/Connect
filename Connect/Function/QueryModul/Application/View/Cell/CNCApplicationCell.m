@@ -89,8 +89,9 @@
     self.apv1 = [[QMUIButton alloc] init];
     [self.transfromView addSubview:self.apv1];
     [self.apv1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.appVerison1Activity);
+        make.left.equalTo(self.appVerison1Activity);
         make.right.equalTo(self.appVersion1.mas_right);
+        make.top.bottom.equalTo(self.transfromView);
     }];
     
     self.appVerison2Activity = [[UIView alloc] init];
@@ -113,8 +114,9 @@
     self.apv2 = [[QMUIButton alloc] init];
     [self.transfromView addSubview:self.apv2];
     [self.apv2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.appVerison2Activity);
+        make.left.equalTo(self.appVerison2Activity);
         make.right.equalTo(self.appVersion2.mas_right);
+        make.top.bottom.equalTo(self.apv1);
     }];
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGesterDidPan:)];
