@@ -89,9 +89,9 @@
     self.apv1 = [[QMUIButton alloc] init];
     [self.transfromView addSubview:self.apv1];
     [self.apv1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.appVerison1Activity);
+        make.left.top.equalTo(self.appVerison1Activity);
         make.right.equalTo(self.appVersion1.mas_right);
-        make.top.bottom.equalTo(self.transfromView);
+        make.bottom.equalTo(self.transfromView);
     }];
     
     self.appVerison2Activity = [[UIView alloc] init];
