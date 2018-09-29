@@ -14,4 +14,7 @@
 /** 获取当前时间, 格式为:(MM-dd) */
 + (NSString *)cnc_currentDate;
 
+/** 获取具体格式的当前时间 */
++ (NSString *)cnc_currentDateWithFormat:(NSString *)format;
+
 @end

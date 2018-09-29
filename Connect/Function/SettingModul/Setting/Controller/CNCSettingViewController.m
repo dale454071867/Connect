@@ -88,7 +88,7 @@
         [self.model cnc_clearCacheWithCallBack:^{
             [weakSelf.settingTableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
         }];
-    }else if(ISEqualToString(model.title, @"忽略的Apps")) {
+    }else if(ISEqualToString(model.title, @"遗忘之城")) {
         [self.navigationController pushViewController:[CNCIgnoreAppsViewController new] animated:YES];
     }else if (ISEqualToString(model.title, @"隐藏等待提交状态的Apps") ||
               ISEqualToString(model.title, @"显示等待提交状态的Apps")) {

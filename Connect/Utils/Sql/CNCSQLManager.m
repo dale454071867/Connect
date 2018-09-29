@@ -17,8 +17,8 @@
 /** 账号模型数组 */
 @property(nonatomic, copy, readwrite) NSArray<CNCAccountModel *> *accountModels;
 
-/** 忽略App的模型数组 */
-//@property(nonatomic, copy, readwrite) NSArray *ignoreAppModels;
+/** 被忽略的App模型数组 */
+@property(nonatomic, copy, readwrite) NSArray<CNCIgnoreAppModel *> *ignoreAppModels;
 
 /** 账号sql对象 */
 @property(nonatomic, strong) YTKKeyValueStore *accountStore;
@@ -64,16 +64,45 @@
     self.accountModels = nil;
 }
 
+- (void)cnc_putToIgnoreAppSQLTableWithModel:(CNCIgnoreAppModel *)model {
+    [self.ignoreAppStore putObject:model.yy_modelToJSONObject withId:model.appid intoTable:kIGNOREAPPSQLTABLENAME];
+    NSMutableArray<CNCIgnoreAppModel *> *arrM = [NSMutableArray arrayWithArray:self.ignoreAppModels];
+    [arrM insertObject:model atIndex:0];
+    self.ignoreAppModels = arrM;
+    arrM = nil;
+}
+
+- (void)cnc_deleteForIgnoreAppSQLTableWithModel:(CNCIgnoreAppModel *)model {
+    [self.ignoreAppStore deleteObjectById:model.appid fromTable:kIGNOREAPPSQLTABLENAME];
+    NSMutableArray<CNCIgnoreAppModel *> *arrM = [NSMutableArray arrayWithArray:self.ignoreAppModels];
+    [arrM removeObject:model];
+    self.ignoreAppModels = arrM;
+    arrM = nil;
+}
+
+
 - (NSArray<CNCAccountModel *> *)accountModels {
     if (!_accountModels) {
-        NSMutableArray<CNCAccountModel *> *arrM = [NSMutableArray array];
+        NSMutableArray<CNCAccountModel *> *tempM = [NSMutableArray array];
         NSArray<YTKKeyValueItem *>*items = [self.accountStore getAllItemsFromTable:kACCOUNTSQLTABLENAME];
         [items enumerateObjectsUsingBlock:^(YTKKeyValueItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [arrM insertObject:[CNCAccountModel yy_modelWithJSON:obj.itemObject] atIndex:0];
+            [tempM insertObject:[CNCAccountModel yy_modelWithJSON:obj.itemObject] atIndex:0];
         }];
-        _accountModels = [NSArray arrayWithArray:arrM];
+        _accountModels = [NSArray arrayWithArray:tempM];
     }
     return _accountModels;
+}
+
+- (NSArray<CNCIgnoreAppModel *> *)ignoreAppModels {
+    if (!_ignoreAppModels) {
+        NSMutableArray<CNCIgnoreAppModel *> *tempM = [NSMutableArray array];
+        NSArray<YTKKeyValueItem *>*items = [self.ignoreAppStore getAllItemsFromTable:kIGNOREAPPSQLTABLENAME];
+        [items enumerateObjectsUsingBlock:^(YTKKeyValueItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [tempM insertObject:[CNCIgnoreAppModel yy_modelWithJSON:obj.itemObject] atIndex:0];
+        }];
+        _ignoreAppModels = [NSArray arrayWithArray:tempM];
+    }
+    return _ignoreAppModels;
 }
 
 - (YTKKeyValueStore *)accountStore {

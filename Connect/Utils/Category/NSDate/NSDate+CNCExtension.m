@@ -12,9 +12,13 @@
 @implementation NSDate (CNCExtension)
 
 + (NSString *)cnc_currentDate {
+    return [self cnc_currentDateWithFormat:@"MM-dd"];
+}
+
++ (NSString *)cnc_currentDateWithFormat:(NSString *)format {
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter=[[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM-dd"];
+    [formatter setDateFormat:format];
     return [formatter stringFromDate:date];
 }
 

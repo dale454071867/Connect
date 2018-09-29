@@ -11,6 +11,9 @@
 		271D7605215BC17C006A3B84 /* CNCAVSVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D7604215BC17C006A3B84 /* CNCAVSVersionModel.m */; };
 		271D7609215BC3F8006A3B84 /* CNCAVSVAppIconModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */; };
 		271D760E215BC5FC006A3B84 /* UIImageView+CNCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */; };
+		2726C168215F7BED005A0562 /* CNCIgnoreAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2726C167215F7BED005A0562 /* CNCIgnoreAppModel.m */; };
+		2726C16C215F7D99005A0562 /* CNCIgnoreAppsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2726C16B215F7D99005A0562 /* CNCIgnoreAppsView.m */; };
+		2726C170215F7F14005A0562 /* CNCIgnoreAppsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2726C16F215F7F14005A0562 /* CNCIgnoreAppsCell.m */; };
 		27B276D3215CECCB00C1975F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B276D2215CECCA00C1975F /* libiconv.tbd */; };
 		9206348B21578529001FE372 /* CNCWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9206348A21578529001FE372 /* CNCWebView.m */; };
 		921279F72155222F000329FC /* CNCAsymptoticLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 921279F62155222F000329FC /* CNCAsymptoticLabel.m */; };
@@ -83,6 +86,12 @@
 		271D7608215BC3F8006A3B84 /* CNCAVSVAppIconModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCAVSVAppIconModel.m; sourceTree = "<group>"; };
 		271D760C215BC5FC006A3B84 /* UIImageView+CNCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CNCExtension.h"; sourceTree = "<group>"; };
 		271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CNCExtension.m"; sourceTree = "<group>"; };
+		2726C166215F7BED005A0562 /* CNCIgnoreAppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCIgnoreAppModel.h; sourceTree = "<group>"; };
+		2726C167215F7BED005A0562 /* CNCIgnoreAppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCIgnoreAppModel.m; sourceTree = "<group>"; };
+		2726C16A215F7D99005A0562 /* CNCIgnoreAppsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCIgnoreAppsView.h; sourceTree = "<group>"; };
+		2726C16B215F7D99005A0562 /* CNCIgnoreAppsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCIgnoreAppsView.m; sourceTree = "<group>"; };
+		2726C16E215F7F14005A0562 /* CNCIgnoreAppsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNCIgnoreAppsCell.h; sourceTree = "<group>"; };
+		2726C16F215F7F14005A0562 /* CNCIgnoreAppsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNCIgnoreAppsCell.m; sourceTree = "<group>"; };
 		27B276D2215CECCA00C1975F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		353DFB8FF3A7B9CA3B02311B /* Pods-Connect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.release.xcconfig"; sourceTree = "<group>"; };
 		4D954A3E1A009AB9582CF3AB /* libPods-Connect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Connect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +281,34 @@
 				271D760D215BC5FC006A3B84 /* UIImageView+CNCExtension.m */,
 			);
 			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		2726C165215F7BD1005A0562 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2726C166215F7BED005A0562 /* CNCIgnoreAppModel.h */,
+				2726C167215F7BED005A0562 /* CNCIgnoreAppModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2726C169215F7D7F005A0562 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2726C16D215F7EFE005A0562 /* Cell */,
+				2726C16A215F7D99005A0562 /* CNCIgnoreAppsView.h */,
+				2726C16B215F7D99005A0562 /* CNCIgnoreAppsView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2726C16D215F7EFE005A0562 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2726C16E215F7F14005A0562 /* CNCIgnoreAppsCell.h */,
+				2726C16F215F7F14005A0562 /* CNCIgnoreAppsCell.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		92063488215784F5001FE372 /* WKWebView */ = {
@@ -1017,6 +1054,8 @@
 		92FE1752213D0FE900FB238A /* IgnoreApps */ = {
 			isa = PBXGroup;
 			children = (
+				2726C169215F7D7F005A0562 /* View */,
+				2726C165215F7BD1005A0562 /* Model */,
 				92FE1753213D101700FB238A /* Controller */,
 			);
 			path = IgnoreApps;
@@ -1175,6 +1214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2726C168215F7BED005A0562 /* CNCIgnoreAppModel.m in Sources */,
 				92D423FD2147718D00C9F915 /* CNCApplicationViewController.m in Sources */,
 				92FE1756213D102C00FB238A /* CNCIgnoreAppsViewController.m in Sources */,
 				92D423EC2146896500C9F915 /* CNCCreateAccountView.m in Sources */,
@@ -1185,6 +1225,7 @@
 				92A12AA52153CAA300B88DFF /* CNCAnimationLabel.m in Sources */,
 				92D423E62146891C00C9F915 /* CNCQueryView.m in Sources */,
 				92FE16F0213BB04800FB238A /* CNCViewController.m in Sources */,
+				2726C170215F7F14005A0562 /* CNCIgnoreAppsCell.m in Sources */,
 				92D423EF214689A000C9F915 /* CNCAccountManagerView.m in Sources */,
 				92FE171F213BD73400FB238A /* CNCSettingViewController.m in Sources */,
 				92A12AC42154C43900B88DFF /* CNCQiMaiModel.m in Sources */,
@@ -1205,6 +1246,7 @@
 				92FE171A213BD54300FB238A /* CNCTabBarViewController+CNCExtension.m in Sources */,
 				925423242139154900F25530 /* main.m in Sources */,
 				92A12AC12154C42B00B88DFF /* CNCQiMaiView.m in Sources */,
+				2726C16C215F7D99005A0562 /* CNCIgnoreAppsView.m in Sources */,
 				92FE170D213BBAE200FB238A /* UIViewController+CNCExtension.m in Sources */,
 				92F95E292154F42900D8B03C /* CNCDetailViewController.m in Sources */,
 				92FE16F8213BB09D00FB238A /* CNCTabBarViewController.m in Sources */,

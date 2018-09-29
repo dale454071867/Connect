@@ -11,10 +11,12 @@
 #import "CNCApplicationViewController.h"
 #import "UIImageView+CNCExtension.h"
 #import "CNCApplicationModel.h"
+#import "NSDate+CNCExtension.h"
 #import "CNCApplicationView.h"
 #import "CNCApplicationCell.h"
 #import "CNCAnimationLabel.h"
-#import "CNCAccountModel.h"
+#import "CNCSQLManager.h"
+
 
 @interface CNCApplicationViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, QMUINavigationTitleViewDelegate, CNCApplicationCellDelegate>
 
@@ -158,9 +160,18 @@ static NSString *const kIdentifier = @"cell";
     [cell cnc_hiddenRemoveCellOption];
     QMUIAlertController *alert = [QMUIAlertController alertControllerWithTitle:@"您是否要隐藏此App" message:@"当您选择隐藏后,下次查询时此App将不会出现在您的App列表中,但是您可以通过设置中的选项来使被隐藏的App再次显示." preferredStyle:QMUIAlertControllerStyleAlert];
     __weak __typeof(self)weakSelf = self;
-    [alert addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action) {
-        NSMutableArray *arrM = [NSMutableArray arrayWithArray:weakSelf.model.models];
+    [alert addAction:[QMUIAlertAction actionWithTitle:@"确定" style:QMUIAlertActionStyleDefault handler:^(__kindof QMUIAlertController *aAlertController, QMUIAlertAction *action)
+    {
         NSIndexPath *indexPath = [weakSelf.applicationView indexPathForCell:cell];
+        CNCApplicationModel *aModel = weakSelf.model.models[indexPath.row];
+        CNCIgnoreAppModel *imodel = [[CNCIgnoreAppModel alloc] init];
+        [imodel setValue:[NSDate cnc_currentDateWithFormat:@"YYYY-MM-dd hh:mm"] forKey:@"creatTime"];
+        [imodel setValue:aModel.adamId forKey:@"appid"];
+        [imodel setValue:[UIImageJPEGRepresentation(cell.appIcon.image, 1.f) base64EncodedString] forKey:@"appIcon"];
+        [imodel setValue:aModel.name forKey:@"appName"];
+        [imodel setValue:weakSelf.accountModel.email forKey:@"account"];
+        [CNCSQL cnc_putToIgnoreAppSQLTableWithModel:imodel];
+        NSMutableArray *arrM = [NSMutableArray arrayWithArray:weakSelf.model.models];
         [arrM removeObjectAtIndex:indexPath.row];
         [weakSelf.model setValue:arrM forKey:@"models"];
         [weakSelf.applicationView deleteItemsAtIndexPaths:@[indexPath]];

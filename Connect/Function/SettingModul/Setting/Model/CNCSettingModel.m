@@ -32,7 +32,7 @@
                         [self cnc_modelWithValues:@[@"清除缓存", [self cnc_getCacheSize]]],
                         ],
                     @[
-                        [self cnc_modelWithValues:@[@"忽略的Apps", @""]],
+                        [self cnc_modelWithValues:@[@"遗忘之城", @""]],
                         [self cnc_modelWithValues:@[[self cnc_updataHiddenPrepareForUploadCell], @"忽略新建Apps"]],
                         ],
                     ];

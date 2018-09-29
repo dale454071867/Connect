@@ -137,7 +137,20 @@
     [CNCNetwork cnc_setQueryApplicationStatusHeaderHeader];
     [CNCNetwork getUrl:appleApplicationStatusUrlHost callBack:^(id success) {
         if (ISEqualToString(success[@"statusCode"], @"SUCCESS")) {
-            weakSelf.models = [NSArray yy_modelArrayWithClass:[CNCApplicationModel class] json:success[@"data"][@"summaries"]];
+            NSArray <CNCApplicationModel *>*tempModels = [NSArray yy_modelArrayWithClass:[CNCApplicationModel class] json:success[@"data"][@"summaries"]];
+            [tempModels enumerateObjectsUsingBlock:^(CNCApplicationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                CNCApplicationModel *tempAModel = obj;
+                __block BOOL result = YES;
+                [CNCSQL.ignoreAppModels enumerateObjectsUsingBlock:^(CNCIgnoreAppModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (ISEqualToString(tempAModel.adamId, obj.appid)) {
+                        result = NO;
+                        *stop = YES;
+                    }
+                }];
+                if (result) {
+                   weakSelf.models = [weakSelf.models arrayByAddingObject:tempAModel];
+                }
+            }];
             if (weakSelf.cnc_queryApplicationStatusCallBack) {
                 weakSelf.cnc_queryApplicationStatusCallBack();
             }

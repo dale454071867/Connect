@@ -8,6 +8,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CNCIgnoreAppModel.h"
 #import "CNCAccountModel.h"
 
 @interface CNCSQLManager : NSObject
@@ -17,8 +18,8 @@
 /** 账号模型数组 */
 @property(nonatomic, copy, readonly) NSArray<CNCAccountModel *> *accountModels;
 
-/** 忽略App的模型数组 */
-//@property(nonatomic, copy, readonly) NSArray *ignoreAppModels;
+/** 被忽略的App模型数组 */
+@property(nonatomic, copy, readonly) NSArray<CNCIgnoreAppModel *> *ignoreAppModels;
 
 /**
  添加账号
@@ -40,5 +41,19 @@
  @param model 账号模型
  */
 - (void)cnc_editForAccountSQLTableWithModel:(CNCAccountModel *)model;
+
+/**
+ 添加被忽略的app
+ 
+ @param model 被忽略的app模型
+ */
+- (void)cnc_putToIgnoreAppSQLTableWithModel:(CNCIgnoreAppModel *)model;
+
+/**
+ 移除被忽略的app
+ 
+ @param model 账号模型
+ */
+- (void)cnc_deleteForIgnoreAppSQLTableWithModel:(CNCIgnoreAppModel *)model;
 
 @end
