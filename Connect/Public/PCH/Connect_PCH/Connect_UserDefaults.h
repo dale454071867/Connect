@@ -10,14 +10,11 @@
 #ifndef Connect_UserDefaults_h
 #define Connect_UserDefaults_h
 
-/** 是否隐藏准备提交状态的Apps */
-static NSString *const kHiddenPrepareForUpload = @"CNCHiddenPrepareForUpload";
-
 /** 设置bool值 */
 #define CNCUserDefaultsWithBoolForKey(v, k) [[NSUserDefaults standardUserDefaults] setBool:v forKey:k];\
                                             [[NSUserDefaults standardUserDefaults] synchronize];
 
 /** 取出bool值 */
-#define CNCUserDefaultsForKey(k) [[NSUserDefaults standardUserDefaults] boolForKey:k]
+#define CNCUserDefaultsBoolForKey(k) [[NSUserDefaults standardUserDefaults] boolForKey:k]
 
 #endif /* Connect_UserDefaults_h */

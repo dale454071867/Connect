@@ -33,7 +33,7 @@
                         ],
                     @[
                         [self cnc_modelWithValues:@[@"遗忘之城", @""]],
-                        [self cnc_modelWithValues:@[[self cnc_updataHiddenPrepareForUploadCell], @"忽略新建Apps"]],
+                        [self cnc_modelWithValues:@[[self cnc_updataHiddenPrepareForUploadCell], @""]],
                         ],
                     ];
     }
@@ -49,7 +49,7 @@
 }
 
 - (void)cnc_updateHiddenPrepareForUploadCellWithCallBack:(void(^)(void))callBack {
-    CNCUserDefaultsWithBoolForKey(!CNCUserDefaultsForKey(kHiddenPrepareForUpload), kHiddenPrepareForUpload);
+    CNCUserDefaultsWithBoolForKey(!CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload), kHiddenPrepareForUpload);
     [self.models[2][1] setValue:[self cnc_updataHiddenPrepareForUploadCell] forKey:@"title"];
     if (callBack) {
         callBack();
@@ -57,7 +57,7 @@
 }
 
 - (NSString *)cnc_updataHiddenPrepareForUploadCell {
-    NSString *str = !CNCUserDefaultsForKey(kHiddenPrepareForUpload)?@"隐藏等待提交状态的Apps":@"显示等待提交状态的Apps";
+    NSString *str = !CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload)?@"隐藏准备提交状态的Apps":@"显示准备提交状态的Apps";
     return str;
 }
 

@@ -10,6 +10,9 @@
 #ifndef Connect_Regular_h
 #define Connect_Regular_h
 
+/** 是否隐藏准备提交状态的Apps */
+static NSString *const kHiddenPrepareForUpload = @"CNCHiddenPrepareForUpload";
+
 /** 邮箱验证,自己写的第一个正则,记录一下😁😁😁 */
 static NSString *const kEMailRegular = @"^\\w+@([A-Za-z0-9]{2,}\\.)+[A-Za-z]{2,}$";
 

@@ -14,6 +14,7 @@
 #import "CNCSettingModel.h"
 #import "CNCSettingView.h"
 #import "CNCSettingCell.h"
+#import "CNCSQLManager.h"
 
 @interface CNCSettingViewController ()<QMUITableViewDelegate, QMUITableViewDataSource>
 
@@ -69,8 +70,8 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.enabled = NO;
         }
-    }else if (ISEqualToString(model.title, @"隐藏等待提交状态的Apps") ||
-              ISEqualToString(model.title, @"显示等待提交状态的Apps")) {
+    }else if (ISEqualToString(model.title, @"隐藏准备提交状态的Apps") ||
+              ISEqualToString(model.title, @"显示准备提交状态的Apps")) {
         [self cnc_updateWithCell:cell];
     }else {
         
@@ -85,13 +86,21 @@
     if (ISEqualToString(model.title, @"账号管理")) {
         [self.navigationController pushViewController:[CNCAccountManagerViewController new] animated:YES];
     }else if (ISEqualToString(model.title, @"清除缓存")) {
-        [self.model cnc_clearCacheWithCallBack:^{
-            [weakSelf.settingTableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
-        }];
+        [self.toastView showLoading];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.model cnc_clearCacheWithCallBack:^{
+                [weakSelf.settingTableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
+                [weakSelf.toastView showSucceed:@"缓存清除完成" hideAfterDelay:1.25f];
+            }];
+        });
     }else if(ISEqualToString(model.title, @"遗忘之城")) {
-        [self.navigationController pushViewController:[CNCIgnoreAppsViewController new] animated:YES];
-    }else if (ISEqualToString(model.title, @"隐藏等待提交状态的Apps") ||
-              ISEqualToString(model.title, @"显示等待提交状态的Apps")) {
+        if (CNCSQL.ignoreAppModels.count) {
+            [self.navigationController pushViewController:[CNCIgnoreAppsViewController new] animated:YES];
+        }else {
+            [self.toastView showInfo:@"您当前城中还是一片荒芜\n添加几个住户再来视察吧" hideAfterDelay:2.25f];
+        }
+    }else if (ISEqualToString(model.title, @"隐藏准备提交状态的Apps") ||
+              ISEqualToString(model.title, @"显示准备提交状态的Apps")) {
         [self.model cnc_updateHiddenPrepareForUploadCellWithCallBack:^{
             [weakSelf.settingTableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
         }];
@@ -99,10 +108,10 @@
 }
 
 - (void)cnc_updateWithCell:(CNCSettingCell *)cell {
-    cell.backgroundColor = CNCUserDefaultsForKey(kHiddenPrepareForUpload)?QMUICMI.navBarBarTintColor:UIColorWhite;
-    cell.textLabel.textColor = CNCUserDefaultsForKey(kHiddenPrepareForUpload)?UIColorWhite:UIColorBlack;
-    cell.detailTextLabel.textColor = CNCUserDefaultsForKey(kHiddenPrepareForUpload)?UIColorWhite:UIColorGray;;
-    [self cnc_setBackgroundImageWithColor:CNCUserDefaultsForKey(kHiddenPrepareForUpload)?UIColorWhite:UIColorGray forObj:cell.subviews[1]];
+    cell.backgroundColor = CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload)?QMUICMI.navBarBarTintColor:UIColorWhite;
+    cell.textLabel.textColor = CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload)?UIColorWhite:UIColorBlack;
+    cell.detailTextLabel.textColor = CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload)?UIColorWhite:UIColorGray;;
+    [self cnc_setBackgroundImageWithColor:CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload)?UIColorWhite:UIColorGray forObj:cell.subviews[1]];
 }
 
 - (void)cnc_setBackgroundImageWithColor:(UIColor *)color forObj:(id)obj {

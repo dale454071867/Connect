@@ -12,6 +12,8 @@
 @implementation CNCIgnoreAppsCell
 
 - (void)setCellINFO {
+    self.userInteractionEnabled = NO;
+    
     self.appIcon = [[UIImageView alloc] initWithImage:UIImageMake(@"logo2")];
     [self.contentView addSubview:self.appIcon];
     [self.appIcon mas_makeConstraints:^(MASConstraintMaker *make) {

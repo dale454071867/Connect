@@ -68,7 +68,7 @@
     }
     CNCAccountModel *model = CNCSQL.accountModels[indexPath.section];
     cell.emailLabel.text = [NSString stringWithFormat:@"Apple id:%@", model.email];
-    cell.markLabel.text = [NSString stringWithFormat:@"%@:%@", @"备注:", model.mark];
+    cell.markLabel.text = [NSString stringWithFormat:@"%@:%@", @"备注", model.mark];
 //    cell.lastTimeLabel.text = [NSString stringWithFormat:@"%@%@", @"最后更新时间:", model.lastTime];
     return cell;
 }

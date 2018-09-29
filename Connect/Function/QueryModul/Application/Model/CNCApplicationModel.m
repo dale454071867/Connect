@@ -76,6 +76,8 @@
 /** 版本状态 */
 @property(nonatomic, strong, readwrite) NSArray<CNCAVersionSetsModel *> *versionSets;
 
+
+
 /** 暂存账号模型 */
 @property(nonatomic, strong) CNCAccountModel *accountModel;
 
@@ -147,8 +149,12 @@
                         *stop = YES;
                     }
                 }];
+                if (CNCUserDefaultsBoolForKey(kHiddenPrepareForUpload) && result) {
+                    result = (!ISEqualToString(tempAModel.versionSets[0].inFlightVersion.state, @"prepareForUpload") ||
+                              !ISEqualToString(tempAModel.versionSets[0].deliverableVersion.state, @"prepareForUpload"));
+                }
                 if (result) {
-                   weakSelf.models = [weakSelf.models arrayByAddingObject:tempAModel];
+                    weakSelf.models = [weakSelf.models arrayByAddingObject:tempAModel];
                 }
             }];
             if (weakSelf.cnc_queryApplicationStatusCallBack) {
