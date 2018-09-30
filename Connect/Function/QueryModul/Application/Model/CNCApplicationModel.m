@@ -139,6 +139,7 @@
     [CNCNetwork cnc_setQueryApplicationStatusHeaderHeader];
     [CNCNetwork getUrl:appleApplicationStatusUrlHost callBack:^(id success) {
         if (ISEqualToString(success[@"statusCode"], @"SUCCESS")) {
+            weakSelf.models = nil;
             NSArray <CNCApplicationModel *>*tempModels = [NSArray yy_modelArrayWithClass:[CNCApplicationModel class] json:success[@"data"][@"summaries"]];
             [tempModels enumerateObjectsUsingBlock:^(CNCApplicationModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 CNCApplicationModel *tempAModel = obj;

@@ -49,7 +49,7 @@
 /** 版本状态 */
 @property(nonatomic, strong, readonly) NSArray<CNCAVersionSetsModel *> *versionSets;
 
-/** 登录成功 */
+/** 查询 */
 @property(nonatomic, copy) void (^cnc_queryApplicationStatusCallBack)(void);
 
 /**

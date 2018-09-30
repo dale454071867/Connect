@@ -16,7 +16,7 @@
 #import "CNCApplicationCell.h"
 #import "CNCAnimationLabel.h"
 #import "CNCSQLManager.h"
-
+#import <MJRefresh.h>
 
 @interface CNCApplicationController ()<UICollectionViewDelegate, UICollectionViewDataSource, QMUINavigationTitleViewDelegate, CNCApplicationCellDelegate>
 
@@ -51,6 +51,10 @@ static NSString *const kIdentifier = @"cell";
 
 - (void)setUI {
     [self.view addSubview:self.applicationView];
+    __weak __typeof(self)weakSelf = self;
+    self.applicationView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf setNetwork];
+    }];
 }
 
 - (void)setNetwork {
@@ -60,6 +64,7 @@ static NSString *const kIdentifier = @"cell";
     self.model.cnc_queryApplicationStatusCallBack = ^{
         [weakSelf.toastView hideAnimated:YES];
         [weakSelf.applicationView reloadData];
+        [weakSelf.applicationView.mj_header endRefreshing];
     };
 }
 
