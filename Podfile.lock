@@ -21,6 +21,9 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - IQKeyboardManager (6.1.1)
+  - JCore (1.2.2)
+  - JPush (3.1.0):
+    - JCore (~> 1.2.0)
   - Masonry (1.1.0)
   - MJRefresh (3.1.15.7)
   - QMUIKit (2.8.1):
@@ -294,6 +297,7 @@ PODS:
 DEPENDENCIES:
   - DWNetworking
   - IQKeyboardManager
+  - JPush
   - Masonry
   - MJRefresh
   - QMUIKit
@@ -308,6 +312,8 @@ SPEC REPOS:
     - DWNetworking
     - FMDB
     - IQKeyboardManager
+    - JCore
+    - JPush
     - Masonry
     - MJRefresh
     - QMUIKit
@@ -323,6 +329,8 @@ SPEC CHECKSUMS:
   DWNetworking: fc8f374ad31f72195fd44dda826a271db05e6e80
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   IQKeyboardManager: 79c57795f5c2408d259d37b9da2ed07efcbb5225
+  JCore: f14c0549968a63c22e246a4875aa9d428446f373
+  JPush: 5921e25ad13e0386351079217b009f2039084eac
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   QMUIKit: 36fe0f01873605e15e86113403db547aca16e6c5
@@ -333,6 +341,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: b111af3b9ca4242d1c58e14b976928950675514b
+PODFILE CHECKSUM: 3e6602bede2f55df1cc349f2e7428e05a8a9d308
 
 COCOAPODS: 1.5.3

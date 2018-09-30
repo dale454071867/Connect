@@ -53,6 +53,8 @@
         return @"已下架";
     }else if (ISEqualToString(_state, @"readyForSale")) {
         return @"可供销售";
+    }else if (ISEqualToString(_state, @"pendingDeveloperRelease")) {
+        return @"等待开发人员发布";
     }
     return _state;
 }

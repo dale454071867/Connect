@@ -1,4 +1,4 @@
-////  CNCIgnoreAppsViewController.m
+////  CNCIgnoreAppsController.m
 //  Connect
 //
 //  Created by Dwang on 2018/9/3.
@@ -7,18 +7,18 @@
 //  Copyright © 2018年 CoderDwang. All rights reserved.
 //
 
-#import "CNCIgnoreAppsViewController.h"
+#import "CNCIgnoreAppsController.h"
 #import "CNCIgnoreAppsView.h"
 #import "CNCIgnoreAppsCell.h"
 #import "CNCSQLManager.h"
 
-@interface CNCIgnoreAppsViewController ()<QMUITableViewDelegate, QMUITableViewDataSource>
+@interface CNCIgnoreAppsController ()<QMUITableViewDelegate, QMUITableViewDataSource>
 
 @property(nonatomic, strong) CNCIgnoreAppsView *ignoreAppsView;
 
 @end
 
-@implementation CNCIgnoreAppsViewController
+@implementation CNCIgnoreAppsController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -23,5 +23,8 @@ target 'Connect' do
     pod 'IQKeyboardManager'
     # pod 'ISMessages'
     # pod 'KSPhotoBrowser'
+    
+    # 推送
+    pod 'JPush'
 
 end

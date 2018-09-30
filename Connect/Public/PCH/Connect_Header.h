@@ -32,5 +32,6 @@
 #import "Connect_Bool.h"//字符比较
 #import "Connect_Regular.h"//正则
 #import "Connect_UrlHost.h"//请求地址
+#import "Connect_String.h"//字符串
 
 #endif /* Connect_Header_h */

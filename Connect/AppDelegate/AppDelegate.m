@@ -18,7 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self cnc_applyConfiguration];
+    [self cnc_applyConfigurationWithOptions:launchOptions];
     return YES;
 }
 

@@ -12,6 +12,6 @@
 @interface AppDelegate (CNCExtenison)
 
 /** app的全局设置 */
-- (void)cnc_applyConfiguration;
+- (void)cnc_applyConfigurationWithOptions:(NSDictionary *)launchOptions;
 
 @end

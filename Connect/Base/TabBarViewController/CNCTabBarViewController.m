@@ -7,9 +7,9 @@
 //  Copyright © 2018年 CoderDwang. All rights reserved.
 //
 
-#import "CNCQueryViewController.h"
+#import "CNCQueryController.h"
 #import "CNCTabBarViewController.h"
-#import "CNCSettingViewController.h"
+#import "CNCSettingController.h"
 #import "CNCTabBarViewController+CNCExtension.h"
 
 
@@ -21,8 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self cnc_addChildViewController:CNCQueryViewController.new tabBarImageName:@"查询" title:@"查询"];
-    [self cnc_addChildViewController:CNCSettingViewController.new tabBarImageName:@"设置" title:@"设置"];
+    [self cnc_addChildViewController:CNCQueryController.new tabBarImageName:@"查询" title:@"查询"];
+    [self cnc_addChildViewController:CNCSettingController.new tabBarImageName:@"设置" title:@"设置"];
 }
 
 @end

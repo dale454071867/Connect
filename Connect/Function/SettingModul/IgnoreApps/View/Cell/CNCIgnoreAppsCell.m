@@ -12,7 +12,7 @@
 @implementation CNCIgnoreAppsCell
 
 - (void)setCellINFO {
-    self.userInteractionEnabled = NO;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.appIcon = [[UIImageView alloc] initWithImage:UIImageMake(@"logo2")];
     [self.contentView addSubview:self.appIcon];
